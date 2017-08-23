@@ -1,0 +1,155 @@
+<!--FORM HEADER-->
+<div class="container-fluid" style="padding: 0;">
+	<br>
+	<div class="row">
+		<div class="col-lg-12">
+			<h2 style="text-align: center" class="page-header" translate>{{'quest.questTitle'}}</h2>
+		</div>
+	</div>
+</div>
+
+<!--FORM BODY-->
+<div>
+	<div class="container" style="padding: 30px;">
+		<div class="row">
+			<div class="col-sm-12">
+				<form [formGroup]="questForm">
+					<div class="form-group"></div>
+					<wizard #wizard> <wizard-step title="Eligibility"
+						(stepExit)="publishQuestChanges($event,'IE')">
+					<div class="col-sm-12">
+						<div [formGroup]="questForm">
+							<app-initial-eligibility
+								[ieFormGroup]="questForm.controls.ieGroup">
+							</app-initial-eligibility>
+						</div>
+						<div class="col-sm-10"></div>
+						<div class="col-sm-2">
+							<button type="button" class="btn btn-secondary"
+								[disabled]="!questForm.controls.ieGroup.valid"
+								style="float: right" nextStep translate>{{'common.next'}}</button>
+						</div>
+					</div>
+					</wizard-step> <wizard-step title="Fleet"
+						(stepExit)="publishQuestChanges($event,'FE')">
+					<div class="col-sm-12">
+						<div [formGroup]="questForm">
+							<div *ngIf="quest.fleetEntry.vehicleInfos != null">
+								<app-fleet-entry [fleetFormGroup]="questForm.controls.feGroup"></app-fleet-entry>
+							</div>
+						</div>
+						<div class="col-sm-5">
+							<button type="button" class="btn btn-secondary" previousStep
+								translate>{{'common.previous'}}</button>
+						</div>
+						<div class="col-sm-5"></div>
+						<div class="col-sm-2">
+							<button type="button" class="btn btn-secondary"
+								[disabled]="!questForm.controls.feGroup.valid"
+								style="float: right" nextStep translate>{{'common.next'}}</button>
+						</div>
+					</div>
+					</wizard-step> <wizard-step title="Underlying"
+						(stepExit)="publishQuestChanges($event,'UP')">
+					<div class="col-sm-12">
+						<div [formGroup]="questForm">
+							<div >
+								<app-underlying-policies *ngIf="quest !=null && quest.underlyingPolicies != null"
+									[underlyingFormGroup]="questForm.controls.upGroup"></app-underlying-policies>
+							</div>
+						</div>
+						<div class="col-sm-5">
+							<button type="button" class="btn btn-secondary" previousStep
+								translate>{{'common.previous'}}</button>
+						</div>
+						<div class="col-sm-5"></div>
+						<div class="col-sm-2">
+							<button type="button" class="btn btn-secondary"
+								[disabled]="!questForm.controls.upGroup.valid"
+								style="float: right" (click)="generateQuote(wizard)"
+								style="float: right" translate>{{'common.next'}}</button>
+						</div>
+					</div>
+					</wizard-step> <wizard-step title="Indication"
+						(stepExit)="publishQuestChanges($event,'PI')">
+					<div class="col-sm-12">
+						<div [formGroup]="questForm">
+							<div *ngIf="quest.pricingIndication.pricing != null">
+								<app-pricing-indication
+									[pricingFormGroup]="questForm.controls.piGroup"></app-pricing-indication>
+							</div>
+						</div>
+						<div class="col-sm-5">
+							<button type="button" class="btn btn-secondary" previousStep
+								translate>{{'common.previous'}}</button>
+						</div>
+						<div class="col-sm-5"></div>
+						<div class="col-sm-2">
+							<button type="button" class="btn btn-secondary"
+								[disabled]="!questForm.controls.piGroup.valid"
+								style="float: right" nextStep translate>{{'common.next'}}</button>
+						</div>
+					</div>
+					</wizard-step> <wizard-step title="Forms"
+						(stepExit)="publishQuestChanges($event,'FS')">
+					<div class="col-sm-12">
+						<div [formGroup]="questForm">
+							<div *ngIf="quest.forms != null">
+								<app-form-selection
+									[formsFormGroup]="questForm.controls.fsGroup"></app-form-selection>
+							</div>
+						</div>
+						<div class="col-sm-5">
+							<button type="button" class="btn btn-secondary" previousStep
+								translate>{{'common.previous'}}</button>
+						</div>
+						<div class="col-sm-5"></div>
+						<div class="col-sm-2">
+							<button type="button" class="btn btn-secondary"
+								style="float: right" nextStep translate>{{'common.next'}}</button>
+						</div>
+					</div>
+					</wizard-step> <wizard-step title="Subjectivities">
+					<div class="col-sm-12">
+						<div [formGroup]="questForm">
+							<div *ngIf="quest.subjectivity != null">
+								<app-subjectivities-terms
+									[subjectivitiesFormGroup]="questForm.controls.stGroup"></app-subjectivities-terms>
+							</div>
+						</div>
+						<div class="col-sm-5">
+							<button type="button" class="btn btn-secondary" previousStep
+								translate>{{'common.previous'}}</button>
+						</div>
+						<div class="col-sm-5"></div>
+						<div class="col-sm-2">
+							<button type="button" class="btn btn-secondary"
+								style="float: right" nextStep translate>{{'common.next'}}</button>
+						</div>
+					</div>
+					</wizard-step> <wizard-step title="Details"
+						(stepExit)="publishQuestChanges($event,'AD')">
+					<div class="col-sm-12">
+						<div [formGroup]="questForm">
+							<div *ngIf="quest.additionalDetails != null">
+								<app-additional-details
+									[additionalFormGroup]="questForm.controls.adGroup"></app-additional-details>
+							</div>
+						</div>
+						<div class="col-sm-5">
+							<button type="button" class="btn btn-secondary" previousStep
+								translate>{{'common.previous'}}</button>
+						</div>
+						<div class="col-sm-5"></div>
+						<div class="col-sm-2">
+							<button type="button" class="btn btn-secondary"
+								style="float: right" nextStep translate>{{'common.createQuote'}}</button>
+						</div>
+					</div>
+					</wizard-step> </wizard>
+					<br>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

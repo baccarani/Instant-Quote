@@ -1,0 +1,36 @@
+{
+    "node": {
+        "port": 8080,
+        "allowed_origin": [
+            "http://127.0.0.1:4200",
+            "http://localhost:4200",
+            "http://bphammorl1:4200",
+            "http://bphammorl1.cfins.com:4200"
+        ],
+        "maxPayLoad": "500mb",
+        "req_timeout": 1800000,
+        "res_timeout": 1800000,
+        "upload": {
+            "upload_path": "",
+            "upload_dir": "uploads"
+        }
+    },
+    "sqlserver": {
+        "user": "quest",
+        "password": "De8Qu#st",
+        "server": "DVW-SQL02",
+        "database": "QUEST",
+        "pool": {
+            "max": 10,
+            "min": 0,
+            "idleTimeoutMillis": 42000
+        }
+    },
+    "cabAdvantage": {
+        "url": "https://ws.cabadvantage.com/CFWebService.cfc?method=getUWInfo&keycode=gKsshaw6VvmBFdNtsm4hBBEv&dot="
+    },
+	"logger": {
+        "logPath": "logs",
+        "logFile": "quest"
+    }
+}

@@ -1,0 +1,52 @@
+[
+    {
+        "username": "smasilamani",
+        "password": "welcome123",
+        "name": "Siva Masilamani",
+        "email": "sivachidambaram.masilamani@cfins.com",
+        "producer": "996"
+        
+    },
+    {
+        "username": "jlucking",
+        "password": "welcome123",
+        "name": "John Lucking",
+        "email": "john.lucking@cfins.com",
+        "producer": "996"
+    },
+    {
+        "username": "bpham",
+        "password": "welcome123",
+        "name": "Baccarani Pham",
+        "email": "Baccarani.Pham@cfins.com",
+        "producer": "996"
+    },
+    {
+        "username": "kburns",
+        "password": "welcome123",
+        "name": "Kyle Burns",
+        "email": "Kyle.Burns@cfins.com",
+        "producer": "996"
+    },
+    {
+        "username": "jroth",
+        "password": "welcome123",
+        "name": "Jeffrey Roth",
+        "email": "Jeffrey.Roth@cfins.com",
+        "producer": "996"
+    },
+    {
+        "username": "swoods",
+        "password": "welcome123",
+        "name": "Sean Woods",
+        "email": "Sean.Woods@cfins.com",
+        "producer": "996"
+    },
+    {
+        "username": "abell",
+        "password": "welcome123",
+        "name": "Amy Bell",
+        "email": "Amy.Bell@cfins.com",
+        "producer": "996"
+    }
+]

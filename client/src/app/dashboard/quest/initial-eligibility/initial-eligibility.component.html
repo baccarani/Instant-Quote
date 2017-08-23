@@ -1,0 +1,300 @@
+<div [ngClass]="{'overlay': !hideLoader}">
+	<!--INITIAL ELIGIBILITY-->
+	<div class="col-lg-12">
+		<div class="row">
+			<div class="col-sm-12">
+				<div [ngClass]="setClassPanel(ieFormGroup.valid, false)">
+					<div [ngClass]="setClassPanel(ieFormGroup.valid, true)" translate>
+						{{'initialEligibility.initialEligibilityTitle'}}</div>
+
+					<!--INITIAL ELIGIBILITY BODY-->
+					<div class="card-block bg-white">
+						<!--FORM BODY-->
+						<div [formGroup]="ieFormGroup">
+							<fieldset class="form-group">
+
+
+								<div class="row">
+									<!--DOT#-->
+									<div class="col-sm-4">
+										<div class="row">
+											<fieldset class="form-group">
+												<div class="col-sm-12">
+													<label class="form-control-label" translate>{{'dot.dotNum'}}<br></label><br>
+													<div [ngClass]="{'form-group has-danger' : !ieFormGroup.controls['dot'].valid && ieFormGroup.controls['dot'].dirty}">
+														<input type="text" min=0 class="form-control form-control-danger" formControlName="dot" (blur)="searchDOT()" [(ngModel)]="quest.initialEligibility.dot">														<a href="{{saferSysURL}}" target="_blank" style="font-style: italic; font-size: 12px;" translate>{{'common.clickHereToSearchDOT'}}</a>
+													</div>
+												</div>
+											</fieldset>
+										</div>
+									</div>
+
+
+									<!-- Applicant info -->
+									<div class="col-sm-8" [hidden]="hideApplicantInfo">
+										<fieldset class="form-group">
+											<div class="row">
+												<div class="col-sm-12">
+													<label class="form-control-label" translate>{{'applicantInfo.applicantInfoTitle'}}</label>
+													<input type="text" class="form-control" formControlName="info" [(ngModel)]="quest.initialEligibility.applicantInfo.info"
+													 readonly>
+												</div>
+											</div>
+										</fieldset>
+									</div>
+									<!-- End of Applicant Info -->
+
+								</div>
+
+								<!-- Passenger Indicator from XML to check if DOT# is revoked -->
+								
+								<div class="row">
+									<div class="col-sm-12">
+										<div class="alert" [hidden]="hidePassengerIndErr" translate>
+											{{'error.ineligible'}} <a href="{{smallFleetSolnURL}}" target="_blank" style="color: rgb(221, 44, 0); text-decoration: underline;"
+											 translate>{{'common.accountExecutive'}}</a>
+										</div>
+									</div>
+								</div>
+
+								<!--Eff Date-->
+								<div class="row">
+									<fieldset class="form-group">
+										<div class="col-sm-4">
+											<label class="form-control-label" translate>{{'dot.effDate'}}<br></label><br>
+											<div [ngClass]="{'form-group has-danger' : !ieFormGroup.controls['effDate'].valid && ieFormGroup.controls['effDate'].dirty}">
+												<my-date-picker id="effDate" style="padding: 0px; border: 0" [options]="myDatePickerOptions" class="form-control form-control-danger"
+												 formControlName="effDate" [(ngModel)]="effDtModel" [placeholder]="datePlaceholder">
+													<div class="mydp" ng-reflect-ng-style="[object Object]" style="width: 100%; border: 0px; padding-top: 2px; padding-left: 10px"></div>
+												</my-date-picker>
+											</div>
+										</div>
+									</fieldset>
+									<div class="col-sm-12">
+										<div class="alert" [hidden]="hideEffDateErr" translate>{{effDateErrorMsg}}</div>
+									</div>
+								</div>
+
+								<!--Exp Date-->
+								<div class="row">
+									<fieldset class="form-group">
+										<div class="col-sm-4">
+											<label class="form-control-label" translate>{{'dot.expDate'}}<br></label><br>
+											<div [ngClass]="{'form-group has-danger' : !ieFormGroup.controls['expDate'].valid && ieFormGroup.controls['expDate'].dirty}">
+												<my-date-picker id="expDate" style="padding: 0px; border: 0" [options]="myDatePickerOptions" class="form-control form-control-danger"
+												 formControlName="expDate" [(ngModel)]="expDtModel" [placeholder]="datePlaceholder"></my-date-picker>
+											</div>
+										</div>
+									</fieldset>
+									<div class="col-sm-7">
+										<div class="alert" [hidden]="hideExpDateErr" translate>{{expDateErrorMsg}}</div>
+									</div>
+								</div>
+
+								<!--Years In Business-->
+								<div class="row" [hidden]="hideYIB">
+									<fieldset class="form-group">
+										<div class="col-sm-4">
+											<label class="form-control-label" translate>{{'dot.yearsInBus'}}<br></label><br>
+											<div [ngClass]="{'form-group has-danger' : !ieFormGroup.controls['yearInBus'].valid && ieFormGroup.controls['yearInBus'].dirty}">
+												<input type="number" min=0 class="form-control form-control-danger" formControlName="yearInBus" [(ngModel)]="quest.initialEligibility.yearInBus">
+											</div>
+										</div>
+									</fieldset>
+								</div>
+
+								<!--Driving Experience-->
+								<div class="row" [hidden]="hideIsDrivingExperience">
+									<fieldset class="form-group">
+										<div class="col-sm-12">
+											<br> <label translate>{{'dot.isDrivingExperience'}}<br></label><br>
+											<label class="radio-inline" translate> <input
+												type="radio"
+												[(ngModel)]="quest.initialEligibility.isDrivingExperience"
+												formControlName="isDrivingExperience"
+												name="isDrivingExperience" value="Y">
+												{{'common.yes'}}
+											</label> <label class="radio-inline" translate> <input
+												type="radio"
+												[(ngModel)]="quest.initialEligibility.isDrivingExperience"
+												formControlName="isDrivingExperience"
+												name="isDrivingExperience" value="N">
+												{{'common.no'}}
+											</label>
+										</div>
+									</fieldset>
+									<div class="col-sm-12">
+										<div class="alert" [hidden]="hideisDrivingExperienceErr" translate>
+											{{'error.ineligible'}} <a href="{{smallFleetSolnURL}}" target="_blank" style="color: rgb(221, 44, 0); text-decoration: underline;"
+											 translate>{{'common.accountExecutive'}}</a>
+										</div>
+										<br>
+									</div>
+								</div>
+
+								<!--Safety Rating-->
+								<div class="row" [hidden]="hideSafteyRating">
+									<fieldset class="form-group">
+										<div class="col-sm-12">
+											<label translate>{{'dot.safetyRating.safetyRating'}}<br></label><br>
+											<label class="radio-inline" translate> <input
+												type="radio"
+												[(ngModel)]="quest.initialEligibility.safetyRating"
+												formControlName="safetyRating" name="safetyRating" value="S"
+												[attr.disabled]="true" />{{'dot.safetyRating.satisfactory'}}<br>
+											</label> <label class="radio-inline" translate> <input
+												type="radio"
+												[(ngModel)]="quest.initialEligibility.safetyRating"
+												formControlName="safetyRating" name="safetyRating" value="C"
+												[attr.disabled]="true" />{{'dot.safetyRating.conditional'}}<br>
+											</label> <label class="radio-inline" translate> <input
+												type="radio"
+												[(ngModel)]="quest.initialEligibility.safetyRating"
+												formControlName="safetyRating" name="safetyRating" value="U"
+												[attr.disabled]="true" />{{'dot.safetyRating.unsatisfactory'}}<br>
+											</label> <label class="radio-inline" translate> <input
+												type="radio"
+												[(ngModel)]="quest.initialEligibility.safetyRating"
+												formControlName="safetyRating" name="safetyRating"
+												value="NR" [attr.disabled]="true" />{{'dot.safetyRating.notRated'}}<br>
+											</label>
+										</div>
+									</fieldset>
+									<div class="col-sm-12">
+										<div class="alert" [hidden]="hideSafetyRatingErr" translate>
+											{{'error.ineligible'}} <a href="{{smallFleetSolnURL}}" target="_blank" style="color: rgb(221, 44, 0); text-decoration: underline;"
+											 translate>{{'common.accountExecutive'}}</a>
+										</div>
+										<br>
+									</div>
+								</div>
+
+								<!-- Primary Liabilities -->
+								<div class="row">
+									<fieldset class="form-group">
+										<div class="col-sm-12">
+											<label translate>{{'dot.primaryLiability.primaryLiability'}}<br></label><br>
+											<label class="checkbox-inline" translate> <input
+												type="checkbox"
+												[(ngModel)]="quest.initialEligibility.primaryAL"
+												formControlName="primaryAL" name="primaryAL">{{'dot.primaryLiability.primaryAL'}}<br>
+											</label> <label class="checkbox-inline" translate> <input
+												type="checkbox"
+												[(ngModel)]="quest.initialEligibility.primaryGL"
+												formControlName="primaryGL" name="primaryGL">{{'dot.primaryLiability.primaryGL'}}<br>
+											</label> <label class="checkbox-inline" translate> <input
+												type="checkbox"
+												[(ngModel)]="quest.initialEligibility.primaryEL"
+												formControlName="primaryEL" name="primaryEL">{{'dot.primaryLiability.primaryEL'}}<br>
+											</label><br>
+										</div>
+									</fieldset>
+									<div class="col-sm-12">
+										<div class="alert" [hidden]="hideAutoLiabErr" translate>{{'error.ineligible.autoLiab'}}</div>
+										<br>
+									</div>
+								</div>
+
+								<!--Truckers Only-->
+								<div class="row" [hidden]="hideCGLTrucker">
+									<fieldset class="form-group">
+										<div class="col-sm-12">
+											<label translate>{{'dot.truckersOnly'}}<br></label><br>
+											<label class="radio-inline" translate> <input
+												type="radio"
+												[(ngModel)]="quest.initialEligibility.truckersOnly"
+												formControlName="truckersOnly" name="truckersOnly" value="Y">
+												{{'common.yes'}}
+											</label> <label class="radio-inline" translate> <input
+												type="radio"
+												[(ngModel)]="quest.initialEligibility.truckersOnly"
+												formControlName="truckersOnly" name="truckersOnly" value="N">
+												{{'common.no'}}
+											</label>
+										</div>
+									</fieldset>
+									<div class="col-sm-12">
+										<div class="alert" [hidden]="hideTruckersOnlyErr" translate>
+											{{'error.ineligible'}} <a href="{{smallFleetSolnURL}}" target="_blank" style="color: rgb(221, 44, 0); text-decoration: underline;"
+											 translate>{{'common.accountExecutive'}}</a>
+										</div>
+										<br>
+									</div>
+								</div>
+
+								<!-- Unscheduled vehicle -->
+								<div class="row">
+									<fieldset class="form-group">
+										<div class="col-sm-12">
+											<label translate>{{'dot.unscheduledVehicle'}}<br></label><br>
+											<label class="radio-inline" translate> <input
+												type="radio"
+												[(ngModel)]="quest.initialEligibility.isUnschdVehicle"
+												formControlName="isUnschdVehicle" name="isUnschdVehicle"
+												value="Y">{{'common.yes'}}<br>
+											</label> <label class="radio-inline" translate> <input
+												type="radio"
+												[(ngModel)]="quest.initialEligibility.isUnschdVehicle"
+												formControlName="isUnschdVehicle" name="isUnschdVehicle"
+												value="N">{{'common.no'}}
+											</label>
+										</div>
+									</fieldset>
+									<div class="col-sm-12">
+										<div class="alert" [hidden]="hideUnschdVehErr" translate>
+											{{'error.ineligible'}} <a href="{{smallFleetSolnURL}}" target="_blank" style="color: rgb(221, 44, 0); text-decoration: underline;"
+											 translate>{{'common.accountExecutive'}}</a>
+										</div>
+										<br>
+									</div>
+								</div>
+
+								<!--Services Provided Or Commodities Hauled-->
+								<div class="row">
+									<fieldset class="form-group">
+										<div class="col-sm-12">
+											<label translate>{{'dot.serviceProvdCommHaul'}}<br></label><br>
+											<label class="radio-inline" translate> <input
+												type="radio"
+												[(ngModel)]="quest.initialEligibility.isSrvcProvdOrCommodHauled"
+												formControlName="isSrvcProvdOrCommodHauled"
+												name="isSrvcProvdOrCommodHauled" value="Y">{{'common.yes'}}<br>
+											</label> <label class="radio-inline" translate> <input
+												type="radio"
+												[(ngModel)]="quest.initialEligibility.isSrvcProvdOrCommodHauled"
+												formControlName="isSrvcProvdOrCommodHauled"
+												name="isSrvcProvdOrCommodHauled" value="N">{{'common.no'}}
+											</label><br> <br>
+										</div>
+										<div class="col-sm-12">
+											<div class="alert" [hidden]="hideSrvcProdCommHauErr" translate>
+												{{'error.ineligible'}} <a href="{{smallFleetSolnURL}}" target="_blank" style="color: rgb(221, 44, 0); text-decoration: underline;"
+												 translate>{{'common.accountExecutive'}}</a>
+											</div>
+										</div>
+										<div class="col-sm-12">
+											<div class="table-responsive table-bordered">
+												<table class="table">
+													<tbody>
+														<tr *ngFor="let srvProdCommHaulRow of srvsPrdCommHauledValues">
+															<td *ngFor="let srvcProvCommHaul of srvProdCommHaulRow">
+																<label>{{srvcProvCommHaul}}</label>
+															</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</fieldset>
+								</div>
+							</fieldset>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row" style="position: relative; z-index: -1">
+	<div class="loader" style="position: absolute !important; top: 30%; left: 50%;" [hidden]="hideLoader"></div>
+</div>

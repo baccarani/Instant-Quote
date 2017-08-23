@@ -1,0 +1,434 @@
+import org.apache.tools.ant.filters.*
+import java.io.File
+
+apply plugin: 'maven'
+apply plugin: 'distribution'
+
+archivesBaseName ='Quest'
+
+//These are environment variables
+ext.buildApplication=System.env['IS_BUILD_APP']
+
+ext.stageFiles=System.env['IS_STAGE_APP']
+
+ext.serverTask=System.env['IS_SERVER_TASK']
+
+ext.isDownloadFiles=System.env['IS_DOWNLOAD_FILES']
+
+ext.cfinsReleaseRepoURL=System.env['CFINS_REPO_URL']
+
+ext.repoDownloadURL=System.env['NEXUS_DOWNLOAD_URL']
+
+repoDownloadURL=repoDownloadURL.endsWith("/")?repoDownloadURL:repoDownloadURL+"/"
+
+ext.cfinsReadOnlyRepoURL=System.env['COMMON_REPO']
+
+ext.serverStageDir=System.env['SERVER_STAGE_DIR']
+
+ext.serverStageCurDir=System.env['UNIX_SERVER_STAGE_CUR_DIR']
+
+ext.serverStageBkpDir=System.env['UNIX_SERVER_STAGE_BKP_DIR']
+
+ext.uploadFiles=System.env['UPLOAD_FILES_TO_NEXUS']
+
+ext.repoUserName=System.env['REPO_USER_NAME']
+
+ext.repoPassword=System.env['REPO_PASSWORD']
+
+ext.serverUserName=System.env['SERVER_USERNAME']
+
+ext.serverKeyFile=System.env['SERVER_KEY_FILE']
+
+ext.server=System.env['SERVER_NAME']
+
+ext.sudoUser=System.env['UNIX_SUDO_USER']
+
+//These are system properties(parameters of the job)
+
+ext.buildEnv=System.properties['BUILD_ENV']
+
+ext.versionType=System.properties['VERSION_TYPE']
+
+ext.appVersion=System.properties['VERSION']
+
+ext.serverAction=System.properties['SERVER_TASK']
+
+def questFiles=new File(projectDir.path+"/filesToServer")
+
+ext.filesToServer=questFiles
+
+def npmEnv=""
+
+group = "com.cfins.quest"
+
+repositories {  
+	maven{ 
+		credentials {
+			username System.env['REPO_USER_NAME']
+			password System.env['REPO_PASSWORD']
+		}      
+		url cfinsReleaseRepoURL
+		url cfinsReadOnlyRepoURL
+	}
+}
+
+//Jar file for CFINS custom plugin
+//This is not for the projects but for the build script itself
+buildscript {	
+	repositories {  
+		maven{ 
+			credentials {
+				username System.env['REPO_USER_NAME']
+				password System.env['REPO_PASSWORD']
+			}      
+			url System.env['COMMON_REPO']
+		}
+	}
+	repositories {  
+		maven{
+			url "https://plugins.gradle.org/m2/"
+		}
+	}
+	dependencies {
+		classpath group:'com.cfins.build.gradle',name:'CFINSGradlePlugins',version:'+',changing:true
+		classpath 'de.undercouch:gradle-download-task:2.0.0'
+		classpath "org.hidetake:gradle-ssh-plugin:2.7.0"
+	}
+}
+
+//Custom plugin that will be used to load the environment properties via build.groovy file
+apply plugin : 'loadBuildEnvPropsPlugin'
+
+apply plugin: 'de.undercouch.download'
+
+apply plugin: "org.hidetake.ssh"
+
+import de.undercouch.gradle.tasks.download.Download
+
+ssh.remotes {
+	appServer {
+		host = server
+		user = serverUserName
+		identity = file(serverKeyFile)
+	}
+}
+
+ssh.settings { 
+	knownHosts = allowAnyHosts
+	fileTransfer="scp"
+}
+
+
+//Versioning Plugin(Make sure to apply only after the group name)
+apply plugin : 'versioningPlugin'
+
+if((isDownloadFiles.equalsIgnoreCase("true") && versionType.equalsIgnoreCase("AUTOMATIC")) || (buildApplication.equalsIgnoreCase("false") && versionType.equalsIgnoreCase("AUTOMATIC"))){
+	version=currentMaxVersion
+}
+
+uploadArchives{
+	repositories.mavenDeployer {
+		configuration = configurations.archives
+
+		repository(url: cfinsReleaseRepoURL) {
+			authentication(userName: repoUserName, password: repoPassword)
+		}
+		pom.project {
+ 			scm{
+ 				url System.env['GIT_URL']
+ 				tag System.env['GIT_VERSION'].equalsIgnoreCase('Tag')?System.env['GIT_VALUE']:System.env['GIT_COMMIT']
+ 			}
+ 		}
+	}
+}
+
+distributions {
+    main {        
+        contents {
+            from ( filesToServer )
+        }
+    }
+}
+
+afterEvaluate{project ->
+	project.tasks.each{curTask ->
+		if(uploadFiles.equalsIgnoreCase("false")){
+			if(curTask.name.toLowerCase().contains("upload")){
+				curTask.enabled=false
+			}
+		}
+		curTask.outputs.upToDateWhen { false }
+	}
+}
+
+clean{
+	doLast{
+		new File(project.libsDir.path).mkdirs()	
+		filesToServer.deleteDir()
+		new File(project.distZip.destinationDir.path).mkdirs()	
+	}
+}
+
+artifacts{
+	archives distZip
+}
+
+task runClientBuild(type:Exec){
+	workingDir rootProject.projectDir.path+'/client'
+	if(buildEnv.equalsIgnoreCase('local')){
+		npmEnv = "dev"
+	}else{
+		npmEnv = "production"
+	}
+	commandLine 'cmd', '/c', 'npm install --only='+npmEnv+' && ng build --environment='+buildEnv.toLowerCase()
+}
+
+task copyClientFiles(type: Copy) {
+	from rootProject.projectDir.path+'/client/dist'
+	into filesToServer.path+'/client/src'
+}
+
+task copyClientDockerFile(type: Copy) {
+	from rootProject.projectDir.path+'/client'
+	include '*.docker'
+	into filesToServer.path+'/client'
+}
+
+task copyServerFiles(type: Copy) {
+	from(rootProject.projectDir.path+'/server'){
+		include 'package.json'
+	}
+	from(rootProject.projectDir.path+'/server'){
+		include 'src/**'
+	}	
+	filter(ReplaceTokens, tokens: project.buildEnvProps)
+	into filesToServer.path+'/server'
+}
+
+task copyServerDockerFile(type: Copy) {
+	from rootProject.projectDir.path+'/server'
+	include '*.docker'
+	into filesToServer.path+'/server'
+}
+
+task copyDeploymentFile(type: Copy) {
+	from rootProject.projectDir
+	include 'deploy.ksh'
+	
+	project.buildEnvProps.SERVER_STAGE_DIR=project.serverStageDir
+	project.buildEnvProps.GROUP_NAME=project.group
+	project.buildEnvProps.APP_NAME=project.name.toLowerCase()
+	project.buildEnvProps.CURRENT_DIR=serverStageCurDir
+	
+	filter(ReplaceTokens, tokens: project.buildEnvProps)
+	into filesToServer.path+'/build'
+}
+
+task downloadZipFromNexus(type: Download) {	
+	src([
+		repoDownloadURL+project.group.replaceAll("\\.","/")+"/"+project.name+"/"+project.version+"/"+project.distZip.archiveName			
+	])
+	username repoUserName
+	password repoPassword
+	new File(project.distZip.destinationDir.path).deleteDir()
+	new File(project.distZip.destinationDir.path).mkdirs()
+	dest project.distZip.destinationDir
+}
+
+task explodeZip(type: Copy) {
+	from zipTree(project.distZip.archivePath)
+	into filesToServer
+	doLast{
+		copy {
+			from explodeZip.destinationDir.path+"/"+project.archivesBaseName+"-"+version
+			into filesToServer			
+		}
+		new File(explodeZip.destinationDir.path+"/"+project.archivesBaseName+"-"+version).deleteDir()
+	}
+}
+
+//since no of files are huge,it is better to zip and stage them instead of staging individual files
+task createZipFileToStage(type:Zip){
+	from filesToServer
+	doLast{
+		copy {
+			from createZipFileToStage.destinationDir
+			into filesToServer
+			include createZipFileToStage.archiveName
+			rename(createZipFileToStage.baseName+"-"+version,project.name.toLowerCase())
+		}
+		
+		new File(filesToServer.path+'/server').deleteDir()
+		new File(filesToServer.path+'/client').deleteDir()
+		new File(filesToServer.path+'/build').deleteDir()
+	}
+}
+
+task stageApplicationFiles(){
+	doLast{
+		def serverBackupDir=serverStageDir+"/"+project.name.toLowerCase()+"/"+serverStageBkpDir
+		def serverCurDir=serverStageDir+"/"+project.name.toLowerCase()+"/"+serverStageCurDir	
+		def curZipFile=serverCurDir+"/"+project.name.toLowerCase()+".zip"
+		def cmdStr="""\
+						#!/bin/ksh
+						mkdir -p """+serverBackupDir+"""
+						rm -rf """+serverBackupDir+"""/*
+						mkdir -p """+serverCurDir+"""
+						if [ "\$(ls -A """+serverCurDir+""")" ]; then							 
+							mv """+serverCurDir+"""/* """ +serverBackupDir+"""
+						fi
+						exit"""
+		cmdStr=cmdStr.stripMargin().stripIndent()						
+		logger.debug("Following command will be executed as a script :\n\n"+ cmdStr)
+		
+		try{
+			ssh.run {
+				session(ssh.remotes.appServer) {
+					//backup current files to backup dir
+					executeScript(cmdStr)
+					
+					//scp the files from local to remote server
+					filesToServer.listFiles().each{
+						put from: it, into: serverCurDir
+					}
+							
+					//set the file permission
+					cmdStr="""\
+						#!/bin/ksh
+						if [ -e """+curZipFile+""" ]; then
+							unzip -o """+curZipFile+""" -d """+serverCurDir+"""
+							rm -rf """+curZipFile+"""
+						fi
+						find """+serverCurDir+"""/.. -type f -name '*.*' -exec chmod 640 {} \\;
+						find """+serverCurDir+""" -type f \\( -name '*.sh' -o -name '*.ksh' -o -name '*.docker' -o -name 'DockerFile' \\) -exec chmod 744 {} \\;
+						find """+serverCurDir+""" -type f \\( -name '*.sh' -o -name '*.xml' -o -name '*.js' -o -name '*.json' -o -name '*.ksh' -o -name '*.sql' -o -name '*.txt' -o -name '*.xsd' \\) -exec dos2unix {} \\;				
+						exit"""
+					cmdStr=cmdStr.stripMargin().stripIndent()
+					logger.debug("Following command will be executed as a script :\n\n"+ cmdStr)
+					executeScript(cmdStr)
+				}
+			}
+		}catch(org.hidetake.groovy.ssh.session.BadExitStatusException exe){
+			println ""
+			println "Problem staging files from  "+filesToServer+" to server "+server
+			println ""
+			throw exe
+		}
+	}
+}
+
+task serverActionTask(){
+	doLast{		
+		def serverCurDir=serverStageDir+"/"+project.name.toLowerCase()+"/"+serverStageCurDir		
+		def cmdStr="""\
+						#!/bin/ksh						
+						cd """+serverCurDir+"""/build
+						ksh deploy.ksh """+project.version+"""
+						exit"""
+		cmdStr=cmdStr.stripMargin().stripIndent()
+		println cmdStr
+		logger.debug("Following command will be executed as a script :\n\n"+ cmdStr)
+		
+		try{
+			ssh.run {
+				session(ssh.remotes.appServer) {
+					//backup current files to backup dir
+					executeScript(cmdStr)
+				}
+			}
+		}catch(org.hidetake.groovy.ssh.session.BadExitStatusException exe){
+			println ""
+			println "Problem deployinh applications on server "+server
+			println ""
+			throw exe
+		}
+	}
+}
+
+task displayProjectInfo{
+	doFirst{	
+		println ''
+		println '**********************************************'
+		println "Build Version : "+version
+		println '**********************************************'
+		println ''
+		
+		println '**********************************************'
+		println "Base directory: "+project.projectDir.path
+		println "Running script: $buildFile"
+		println "Tasks Requested to run : $gradle.startParameter.taskNames"
+		println '**********************************************'
+		println ''
+		println "Quest build started..."
+		println ""
+	}
+}
+
+task startBuild{
+	doLast{
+		println "Services Files build completed successfully..."
+		println ""
+	}
+}
+
+if(buildApplication.equalsIgnoreCase("false")){	
+	tasks.each { curTask ->
+		if(!(curTask.name.equalsIgnoreCase("stageApplicationFiles") ||curTask.name.equalsIgnoreCase("explodeZip") ||curTask.name.equalsIgnoreCase("createZipFileToStage") ||  curTask.name.equalsIgnoreCase("downloadZipFromNexus") || curTask.name.equalsIgnoreCase("clean") || curTask.name.equalsIgnoreCase("displayProjectInfo") || curTask.name.equalsIgnoreCase("serverActionTask") || curTask.name.equalsIgnoreCase("startBuild"))){
+			curTask.enabled=false
+		}	
+	}
+}
+
+//only server task is needed
+if(project.stageFiles.equalsIgnoreCase("false") && project.buildApplication.equalsIgnoreCase("false")){
+
+}
+
+if(project.stageFiles.equalsIgnoreCase("false")){
+	stageApplicationFiles.enabled=false;
+	createZipFileToStage.enabled=false
+	explodeZip.enabled=false	
+}
+
+if(project.serverTask.equalsIgnoreCase("false")){
+	serverActionTask.enabled=false;
+}
+
+if(isDownloadFiles.equalsIgnoreCase("false")){
+	downloadZipFromNexus.enabled=false
+}
+
+//since gradle 2.4,this task runs when using distribution plugin.Reported to Gradle community
+configurations.archives.artifacts.removeAll { it.archiveTask.is distTar } 
+
+clean.dependsOn('displayProjectInfo')
+
+copyServerFiles.dependsOn('clean')
+
+copyServerDockerFile.dependsOn('copyServerFiles')
+
+runClientBuild.dependsOn('copyServerDockerFile')
+
+copyClientFiles.dependsOn('runClientBuild')
+
+copyClientDockerFile.dependsOn('copyClientFiles')
+
+copyDeploymentFile.dependsOn('copyClientDockerFile')
+
+distZip.dependsOn('copyDeploymentFile')
+
+uploadArchives.dependsOn('distZip')
+
+downloadZipFromNexus.dependsOn('uploadArchives')
+
+explodeZip.dependsOn('downloadZipFromNexus')
+
+createZipFileToStage.dependsOn('explodeZip')
+
+stageApplicationFiles.dependsOn('createZipFileToStage')
+
+serverActionTask.dependsOn('stageApplicationFiles')
+
+startBuild.dependsOn('serverActionTask')
+
+defaultTasks 'startBuild'

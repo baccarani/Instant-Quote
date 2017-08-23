@@ -1,0 +1,180 @@
+{
+	"quest": {
+		"questTitle": "QUEST"
+	},
+	"login": {
+		"loginButtonText": "Login",
+		"userPlaceHolder": "Username",
+		"pwdPlaceHolder": "Password",
+		"registerBtnText": "Register"
+	},
+	"welcomePage": {
+		"excessCoverage": {
+			"excessCoverage": "Excess Coverage",
+			"bulletOne": "Lead Or Excess Placements",
+			"bulletTwo": "$2,000 Minimum Premium",
+			"bulletThree": "Up To $5,000,000 limits",
+			"bulletFour": "MCS-90 Endorsement and Required Filings"
+		},
+		"targetClasses": {
+			"targetClasses": "Target Classes",
+			"bulletOne": "For-Hire Motor Carriers",
+			"bulletTwo": "Owner-Operatorswith Authority",
+			"bulletThree": "Beverage Distributors",
+			"bulletFour": "Will Consider Haz-Mat"
+		},
+		"submissionChecklist": {
+			"submissionChecklist": "Submission Checklist For Expedited Response",
+			"bulletOne": "Completed Accord Application",
+			"bulletTwo": "List & Percentage of Commodities Hauled",
+			"bulletThree": "Projected & Historical Mileage, Revenue, Numbers of Units",
+			"bulletFour": "Radius of Operations",
+			"bulletFive": "5 Year Hard Copy Loss Runs",
+			"bulletSix": "Current Equipment and Driver List (Include Date of Birth, Date of Hire, and Years of Commercial Driving Experience)",
+			"bulletSeven": "Brokerage Revenue & Sub-hauler Cost of Hire, if Any",
+			"bulletEight": "Primary Terms & Condition"
+		}
+	},
+	"dot": {
+		"dotNum": "U.S. DOT#:",
+		"effDate": "Effective Date:",
+		"expDate": "Expiration Date:",
+		"yearsInBus": "Years in Business:",
+		"isDrivingExperience": "All Drivers Have 5 Years Similar Commercial Driving Experience:",
+		"safetyRating": {
+			"safetyRating": "Safety Rating:",
+			"satisfactory": "Satisfactory",
+			"conditional": "Conditional",
+			"unsatisfactory": "Unsatisfactory",
+			"notRated": "Not Rated"
+		},
+		"primaryLiability": {
+			"primaryLiability": "Primary Liabilities That Apply:",
+			"primaryAL": "Primary AL",
+			"primaryGL": "Primary GL",
+			"primaryEL": "Primary EL"
+		},
+		"truckersOnly": "CGL Class 99793 (Truckers) Only:",
+		"unscheduledVehicle": "Unscheduled Vehicles Operated Under The Applicant's Authority:",
+		"serviceProvdCommHaul": "Any Of The Below Services Provided Or Commodities Hauled:"
+	},
+	"initialEligibility": {
+		"initialEligibilityTitle": "Initial Eligibility"
+	},
+	"applicantInfo": {
+		"applicantInfoHeader": "Applicant Information",
+		"applicantInfoTitle": "Applicant Information: ",
+		"applicantName": "Applicant Name:",
+		"address": "Address:"
+	},
+	"fleetEntry": {
+		"fleetEntryTitle": "Fleet Entry",
+		"powerUnit": "Power Unit",
+		"unitNum": "Unit #",
+		"fleets": {
+			"privatePassenger": "Private Passenger",
+			"lightTrucks": "Light Trucks",
+			"mediumTrucks": "Medium Trucks",
+			"heavyTrucks": "Heavy Trucks",
+			"extraHeavyTrucks": "Extra Heavy Trucks",
+			"heavyTrucksTractors": "Heavy Trucks/Tractors",
+			"extraHeavyTrucksTractors": "Extra Heavy Trucks/Tractors"
+		}
+	},
+	"underlyingPolicies": {
+		"underlyingPoliciesTitle": "Underlying Policies",
+		"primaryAL": "Primary Automobile Liability",
+		"primaryGL": "Primary General Liability",
+		"primaryEL": "Primary Employer's Liability",
+		"largeLosses": "Large Losses",
+		"limit": "Limit",
+		"premium": "Premium",
+		"noOfYears": "# Years Of Loss Runs",
+		"noOfYearsDisclaimer": "(Consecutives years incl current. Valued on or after",
+		"noOfClaims": "# Of Claims",
+		"noOfClaimsDisclaimer": "(Excluded claims without loss payment)",
+		"totalIncurredLosses": "Total Incurred Losses",
+		"noOfClaimsOver50k": "# Of Claims Over $50K",
+		"excessLimit": "Excess Limit",
+		"riskPremium": "Risk Premium",
+		"incurredLosses": "Incurred Losses"
+	},
+	"pricingIndication": {
+		"pricingIndicationTitle": "Pricing Indication",
+		"excessLimit": "Excess Limit",
+		"riskPremium": "Risk Premium",
+		"premium": "Premium Information",
+		"riskPercent": "Judgement (%)",
+		"triaPremium": "TRIA Premium",
+		"triaPercent": "TRIA (%)",
+		"insurerProcessingFee": "Insurer Processing Fee",
+		"totalInsrPrmFees": "Total Insurer Premium & Fees",
+		"additionalTerms": "Additional Terms",
+		"premiumBasis": "Premium Basis",
+		"minEarnedAtInception": "Minimum Earned at Inception (%)",
+		"commission": "Commission (%)",
+		"additionalCharges": "Additional Charges (Provided by Broker)",
+		"brokerPolicyFee": "Broker Policy Fee",
+		"surplusLinesTaxesFees": "Surplus Lines Taxes/Fees",
+		"totalPremiumTaxesFees": "Total Premium, Taxes, & Fees",
+		"premiumSelect": "Please Select A Risk Premium for Either a $1,000,000 or $2,000,000 Limit",
+		"pricingDisclaimer": "(The Indication Shown is a Non-Bindable Quote)"
+	},
+	"additionalDetails": {
+		"AL": {
+			"autoLiability": "Automobile Liability"
+		},
+		"GL": {
+			"commercialGL": "Commercial General Liability",
+			"coverage": "Coverage:",
+			"defenseCosts": "Defense Costs:",
+			"occurrenceLimit": "Each Occurrence Limit",
+			"generalAggregate": "General Aggregate"
+		},
+		"EL": {
+			"employerLiability": "Employer Liability "
+		},
+		"additionalDetailsTitle": "Additional Details",
+		"primary/control": "(Primary - Controlling Underlying Insurance)",
+		"insuranceCompany": "Insurance Company:",
+		"policyNumber": "Policy Number:",
+		"effDate": "Effective Date:",
+		"expDate": "Expiration Date:",
+		"limitDetail": "Limit Details"
+	},
+	"common": {
+		"calculatePremium": "Calculate Premium",
+		"clickHereToSearchDOT": "Click here to search a U.S. DOT#",
+		"saferSysURL": "http://www.safersys.org/CompanySnapshot.aspx",
+		"smallFleetSolnURL": "http://www.cfins.com/excess-surplus/transportation-excess-liability/small-fleets/",
+		"save": "Save",
+		"next": "Next",
+		"previous": "Previous",
+		"createQuote": "Create Quote",
+		"accountExecutive": "Account Executive",
+		"yes": "Yes",
+		"no": "No",
+		"clearForm": "Clear Form",
+		"oneMillion": "$1,000,000",
+		"twoMillion": "$2,000,000"
+	},
+	"error": {
+		"ineligible": "Ineligible for the Online Portal contact an",
+		"ineligible.autoLiab": "Ineligible Primary Auto Liability must be Included",
+		"ineligible.fleetEntry": "Fleets with more than {{MAX_UNIT}} Units are Ineligible for the Online Portal",
+		"ineligible.limit": "Please Enter an Amount Between {{LIMIT_LOWER}} and {{LIMIT_UPPER}}",
+		"ineligible.limitEL": "Please Enter an Amount Above {{LIMIT_LOWER_EL}}",
+		"ineligible.totIncurredLosses": "Risks with {{TOTAL_INCURRED_LOSS_UPPER_STR}} or greater incurred losses are ineligible for online portal.",
+		"ineligible.largeLosses": "The Sum of the Incurred Large Losses cannot Exceed the Total Inccured Losses",
+		"ineligible.effDate": "Please Enter an Effective Date that is Between Today's Date and {{EFF_MAX}} Days After",
+		"ineligible.expDate": "Please Enter an Expiration Date Between {{EXP_MIN}}-{{EXP_MAX}} days after the Effective Date",
+		"ineligible.expDateExcess": "The expiration date cannot be the same or before the excess effective date and underlying policies effective date",
+		"ineligible.judgementMod": "Risk Premium Cannot Be Less Than {{MIN_RISK_PREMIUM}}",
+		"ineligible.noYrsLossRunMin": "A minimum of {{MIN_NO_LOSS_RUN_YEARS}} years required to be eligible for online portal",
+		"ineligible.noYrsLossRunMax": "Years of loss runs cannot exceed {{MAX_NO_LOSS_RUN_YEARS}}.",
+		"ineligible.noOfClaimsMax": "No of claims cannot exceed {{MAX_NO_CLAIMS}}.",
+		"ineligible.largeLossesMax": "No of claims over 50K cannot exceed {{MAX_NO_50K_LOSSES}}.",
+		"ineligible.largeLossesMaxALByNoOfClaims": "No of claims over 50K cannot exceed no of claims entered.",
+		"ineligible.largeLossesMaxByAvgSeverity": "No of claims over 50K has to be at least {{MIN_CLAIM_AVG_SEVERITY}}."
+	}
+}

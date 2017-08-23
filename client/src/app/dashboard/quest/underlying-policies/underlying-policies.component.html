@@ -1,0 +1,414 @@
+<div [ngClass]="{'overlay': !hideLoader}">
+	<!--UNDERLYING POLICIES-->
+	<div class="col-lg-12">
+		<div class="row">
+			<div class="col-sm-12">
+				<div [ngClass]="setClassPanel(underlyingFormGroup.valid, false)">
+					<div [ngClass]="setClassPanel(underlyingFormGroup.valid, true)" translate>{{'underlyingPolicies.underlyingPoliciesTitle'}}</div>
+					<div class="card-block bg-white">
+						<div [formGroup]="underlyingFormGroup">
+							<!--PRIMARY AL-->
+							<div [hidden]="!quest.initialEligibility.primaryAL">
+								<div class="row">
+									<div class="col-sm-12">
+										<div class="card-header card-default">
+											<span style="color: black" translate>{{'underlyingPolicies.primaryAL'}}</span>
+										</div>
+										<div class="card mb-3">
+											<div class="card-block">
+												<div>
+													<!--PRIMARY AL FORM-->
+													<fieldset>
+														<div class="row">
+															<!--PRIMARY AL LEFT-->
+															<div class="col-sm-6">
+																<div class="card-header card-default"></div>
+																<div class="card mb-3">
+																	<div class="card-block">
+																		<fieldset class="form-group">
+																			<div class="row">
+																				<fieldset class="form-group">
+																					<div class="col-sm-12">
+																						<!--PRIMARY AL LEFT LIMIT-->
+																						<div class="col-sm-12">
+																							<div class="row">
+																								<fieldset class="form-group">
+																									<label class="form-control-label" translate>{{'underlyingPolicies.limit'}}<br></label><br>
+																									<div [ngClass]="{'form-group has-danger' : !underlyingFormGroup.controls['limitAL'].valid && underlyingFormGroup.controls['limitAL'].touched}">
+																										<input type="text" class="form-control form-control-danger" formControlName="limitAL" currencyMask [options]="{align:'left',allowNegative:false,precision:0}"
+																										 [(ngModel)]="quest.underlyingPolicies.primaryAutoLiability.limit">
+																									</div>
+																								</fieldset>
+																								<div class="col-sm-12">
+																									<div class="alert" [hidden]="hideLimitALErr" translate>{{limitALErrorMsg}}</div>
+																								</div>
+																							</div>
+																						</div>
+																						<!--PRIMARY AL LEFT PREMIUM-->
+																						<div class="col-sm-12">
+																							<div class="row">
+																								<fieldset class="form-group">
+																									<label class="form-control-label" translate>{{'underlyingPolicies.premium'}}<br></label><br>
+																									<div [ngClass]="{'form-group has-danger' : !underlyingFormGroup.controls['premiumAL'].valid && underlyingFormGroup.controls['premiumAL'].touched}">
+																										<input type="text" class="form-control form-control-danger" formControlName="premiumAL" currencyMask [options]="{align:'left',allowNegative:false,precision:0}"
+																										 [(ngModel)]="quest.underlyingPolicies.primaryAutoLiability.premium">
+																									</div>
+																								</fieldset>
+																							</div>
+																						</div>
+																						<!--PRIMARY AL LEFT # YEARS OF LOSS RUNS-->
+																						<div class="col-sm-12">
+																							<div class="row">
+																								<fieldset class="form-group">
+																									<label class="form-control-label" translate>{{'underlyingPolicies.noOfYears'}}<br></label><br>
+																									<label class="disclaimers" translate>{{'underlyingPolicies.noOfYearsDisclaimer'}}</label>
+																									<label
+																									 class="disclaimers">{{quest.initialEligibility.noOfYearsDisclaimer || 'YYYY-MM-DD'}})</label><br>
+																										<div [ngClass]="{'form-group has-danger' : !underlyingFormGroup.controls['numYrsLossRunsAL'].valid && underlyingFormGroup.controls['numYrsLossRunsAL'].touched}">
+																											<input type="text" class="form-control form-control-danger" formControlName="numYrsLossRunsAL" [(ngModel)]="quest.underlyingPolicies.primaryAutoLiability.noOfYearsOfLossRuns">
+																										</div>
+																								</fieldset>
+																								<div class="col-sm-12">
+																									<div class="alert" [hidden]="hideNumYrsLossRunsALErr">{{noOfYearsLossRunALErrMsg }}
+																									</div>
+																								</div>
+																							</div>
+																						</div>
+																						<!--PRIMARY AL LEFT # OF CLAIMS-->
+																						<div class="col-sm-12">
+																							<div class="row">
+																								<fieldset class="form-group">
+																									<label class="form-control-label" translate>{{'underlyingPolicies.noOfClaims'}}<br></label><br>
+																									<label class="disclaimers" translate>{{'underlyingPolicies.noOfClaimsDisclaimer'}}<br></label>
+																									<div [ngClass]="{'form-group has-danger' : !underlyingFormGroup.controls['numClaimsAL'].valid && underlyingFormGroup.controls['numClaimsAL'].touched}">
+																										<input type="text" class="form-control form-control-danger" formControlName="numClaimsAL" [(ngModel)]="quest.underlyingPolicies.primaryAutoLiability.noOfClaims">
+																									</div>
+																								</fieldset>
+																								<div class="col-sm-12">
+																									<div class="alert" [hidden]="hideMaxNoOfClaimsALErr" translate>{{noOfClaimsALErrMsg}}</div>
+																								</div>
+																							</div>
+																						</div>
+																					</div>
+																				</fieldset>
+																			</div>
+																		</fieldset>
+																	</div>
+																</div>
+															</div>
+															<!--PRIMARY AL RIGHT-->
+															<div class="col-sm-6" [hidden]="hideALTotIncdAndLargeLosses">
+																<div class="card-header card-default"></div>
+																<div class="card mb-3">
+																	<div class="card-block">
+																		<fieldset class="form-group">
+																			<div class="row">
+																				<fieldset class="form-group">
+																					<div class="col-sm-12">
+																						<!--PRIMARY AL RIGHT TOTAL INCURRED LOSSES-->
+																						<div class="col-sm-12">
+																							<div class="row">
+																								<fieldset class="form-group">
+																									<label class="form-control-label" translate>{{'underlyingPolicies.totalIncurredLosses'}}<br></label><br>
+																									<div [ngClass]="{'form-group has-danger' : !underlyingFormGroup.controls['totIncurredLossesAL'].valid && underlyingFormGroup.controls['totIncurredLossesAL'].touched}">
+																										<input type="text" class="form-control form-control-danger" formControlName="totIncurredLossesAL" currencyMask [options]="{align:'left',allowNegative:false,precision:0}"
+																										 [(ngModel)]="quest.underlyingPolicies.primaryAutoLiability.totalIncurredLosses">
+																									</div>
+																								</fieldset>
+																								<div class="col-sm-12">
+																									<div class="alert" [hidden]="hideTotIncdLossesALErr">{{totIncurredLossALErrMsg}}</div>
+																								</div>
+																							</div>
+																						</div>
+																						<!--PRIMARY AL RIGHT # OF CLAIMS OVER $50K-->
+																						<div class="col-sm-12" [hidden]="hideLargeLossesAL">
+																							<div class="row">
+																								<fieldset class="form-group">
+																									<label class="form-control-label" translate>{{'underlyingPolicies.noOfClaimsOver50k'}}<br></label><br>
+																									<div [ngClass]="{'form-group has-danger' : !underlyingFormGroup.controls['largeLossesAL'].valid && underlyingFormGroup.controls['largeLossesAL'].touched}">
+																										<input type="text" class="form-control form-control-danger" formControlName="largeLossesAL" [(ngModel)]="quest.underlyingPolicies.primaryAutoLiability.largeLosses">
+																									</div>
+																								</fieldset>
+																								<div class="col-sm-12">
+																									<div class="alert" [hidden]="hideLargeLossesALErr">{{largeLossesALMaxErrMsg}}</div>
+																								</div>
+																							</div>
+																						</div>
+																					</div>
+																				</fieldset>
+																			</div>
+																		</fieldset>
+																	</div>
+																</div>
+															</div>
+															<!--PRIMARY AL LARGE LOSSES-->
+															<div class="col-sm-12" [hidden]="hideIncdLargeLossesAL">
+																<div class="card-header card-default">
+																	<span style="color: black" translate>{{'underlyingPolicies.largeLosses'}}</span>
+																</div>
+																<div class="card mb-3">
+																	<div class="card-block">
+																		<div formArrayName="incurredLossesAL">
+																			<div *ngFor="let incurredLossAL of underlyingFormGroup.controls.incurredLossesAL.controls; let i=index" class="panel panel-default">
+																				<div [formGroupName]="i">
+																					<div class="row">
+																						<div class="col-sm-12">
+																							<label translate>
+																								{{'underlyingPolicies.incurredLosses'}}</label> {{i+1}}
+																						</div>
+																						<br>
+																						<div class="col-sm-6">
+																							<fieldset class="form-group">
+																								<div [ngClass]="{'form-group has-danger' : !underlyingFormGroup.controls['incurredLossesAL'].valid && underlyingFormGroup.controls['incurredLossesAL'].touched}">
+																									<input class="form-control" type="text" currencyMask [options]="{align:'left',allowNegative:false,precision:0}" formControlName="incurred">
+																								</div>
+																							</fieldset>
+																						</div>
+																					</div>
+																					<br>
+																				</div>
+																			</div>
+																		</div>
+																		<div class="alert" [hidden]="hideLargeIncdLossesALErr" translate>{{'error.ineligible.largeLosses'}}</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</fieldset>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!--PRIMARY GL-->
+							<div *ngIf="quest.initialEligibility.primaryGL">
+								<div class="row">
+									<div class="col-sm-12">
+										<div class="card-header card-default">
+											<span style="color: black" translate>{{'underlyingPolicies.primaryGL'}}</span>
+										</div>
+										<div class="card mb-3">
+											<div class="card-block">
+												<div>
+													<!--PRIMARY GL FORM-->
+													<fieldset>
+														<div class="row">
+															<!--PRIMARY GL LEFT-->
+															<div class="col-sm-6">
+																<div class="card-header card-default"></div>
+																<div class="card mb-3">
+																	<div class="card-block">
+																		<fieldset class="form-group">
+																			<div class="row">
+																				<fieldset class="form-group">
+																					<div class="col-sm-12">
+																						<!--PRIMARY GL LEFT LIMIT-->
+																						<div class="col-sm-12">
+																							<div class="row">
+																								<fieldset class="form-group">
+																									<label class="form-control-label" translate>{{'underlyingPolicies.limit'}}<br></label><br>
+																									<div [ngClass]="{'form-group has-danger' : !underlyingFormGroup.controls['limitGL'].valid && underlyingFormGroup.controls['limitGL'].touched}">
+																										<input type="text" class="form-control form-control-danger" formControlName="limitGL" currencyMask [options]="{align:'left',allowNegative:false,precision:0}"
+																										 [(ngModel)]="quest.underlyingPolicies.primaryGeneralLiability.limit">
+																									</div>
+																								</fieldset>
+																								<div class="col-sm-12">
+																									<div class="alert" [hidden]="hideLimitGLErr">{{limitGLErrorMsg}}</div>
+																								</div>
+																							</div>
+																						</div>
+																						<!--PRIMARY GL LEFT PREMIUM-->
+																						<div class="col-sm-12">
+																							<div class="row">
+																								<fieldset class="form-group">
+																									<label class="form-control-label" translate>{{'underlyingPolicies.premium'}}<br></label><br>
+																									<div [ngClass]="{'form-group has-danger' : !underlyingFormGroup.controls['premiumGL'].valid && underlyingFormGroup.controls['premiumGL'].touched}">
+																										<input type="text" class="form-control form-control-danger" formControlName="premiumGL" currencyMask [options]="{align:'left',allowNegative:false,precision:0}"
+																										 [(ngModel)]="quest.underlyingPolicies.primaryGeneralLiability.premium">
+																									</div>
+																								</fieldset>
+																							</div>
+																						</div>
+																						<!--PRIMARY GL LEFT # YEARS OF LOSS RUNS-->
+																						<div class="col-sm-12">
+																							<div class="row">
+																								<fieldset class="form-group">
+																									<label class="form-control-label" translate>{{'underlyingPolicies.noOfYears'}}<br></label><br>
+																									<label class="disclaimers" translate>{{'underlyingPolicies.noOfYearsDisclaimer'}}</label>
+																									<label
+																									 class="disclaimers">{{quest.initialEligibility.noOfYearsDisclaimer || 'YYYY-MM-DD'}})</label><br>
+																										<div [ngClass]="{'form-group has-danger' : !underlyingFormGroup.controls['numYrsLossRunsGL'].valid && underlyingFormGroup.controls['numYrsLossRunsGL'].touched}">
+																											<input type="text" class="form-control form-control-danger" formControlName="numYrsLossRunsGL" [(ngModel)]="quest.underlyingPolicies.primaryGeneralLiability.noOfYearsOfLossRuns">
+																										</div>
+																								</fieldset>
+																								<div class="col-sm-12">
+																									<div class="alert" [hidden]="hideNumYrsLossRunsGLErr" translate>{{noOfYearsLossRunGLErrMsg }}
+																									</div>
+																								</div>
+																							</div>
+																						</div>
+																						<!--PRIMARY GL LEFT # OF CLAIMS-->
+																						<div class="col-sm-12">
+																							<div class="row">
+																								<fieldset class="form-group">
+																									<label class="form-control-label" translate>{{'underlyingPolicies.noOfClaims'}}<br></label><br>
+																									<label class="disclaimers" translate>{{'underlyingPolicies.noOfClaimsDisclaimer'}}<br></label>
+																									<div [ngClass]="{'form-group has-danger' : !underlyingFormGroup.controls['numClaimsGL'].valid && underlyingFormGroup.controls['numClaimsGL'].touched}">
+																										<input type="text" class="form-control form-control-danger" formControlName="numClaimsGL" [(ngModel)]="quest.underlyingPolicies.primaryGeneralLiability.noOfClaims">
+																									</div>
+
+																									<div class="col-sm-12">
+																										<div class="alert" [hidden]="hideMaxNoOfClaimsGLErr">{{noOfClaimsGLErrMsg}}</div>
+																									</div>
+																								</fieldset>
+																							</div>
+																						</div>
+																					</div>
+																				</fieldset>
+																			</div>
+																		</fieldset>
+																	</div>
+																</div>
+															</div>
+															<!--PRIMARY GL RIGHT-->
+															<div class="col-sm-6" [hidden]="hideGLTotIncdAndLargeLosses">
+																<div class="card-header card-default"></div>
+																<div class="card mb-3">
+																	<div class="card-block">
+																		<fieldset class="form-group">
+																			<div class="row">
+																				<fieldset class="form-group">
+																					<div class="col-sm-12">
+																						<!--PRIMARY GL RIGHT TOTAL INCURRED LOSSES-->
+																						<div class="col-sm-12">
+																							<div class="row">
+																								<fieldset class="form-group">
+																									<label class="form-control-label" translate>{{'underlyingPolicies.totalIncurredLosses'}}<br></label><br>
+																									<div [ngClass]="{'form-group has-danger' : !underlyingFormGroup.controls['totIncurredLossesGL'].valid && underlyingFormGroup.controls['totIncurredLossesGL'].touched}">
+																										<input type="text" class="form-control form-control-danger" formControlName="totIncurredLossesGL" currencyMask [options]="{align:'left',allowNegative:false,precision:0}"
+																										 [(ngModel)]="quest.underlyingPolicies.primaryGeneralLiability.totalIncurredLosses">
+																									</div>
+																								</fieldset>
+																								<div class="col-sm-12">
+																									<div class="alert" [hidden]="hideTotIncdLossesGLErr">{{totIncurredLossGLErrMsg}}</div>
+																								</div>
+																							</div>
+																						</div>
+																						<!--PRIMARY AL RIGHT # OF CLAIMS OVER $50K-->
+																						<div class="col-sm-12" [hidden]="hideLargeLossesGL">
+																							<div class="row">
+																								<fieldset class="form-group">
+																									<label class="form-control-label" translate>{{'underlyingPolicies.noOfClaimsOver50k'}}<br></label><br>
+																									<div [ngClass]="{'form-group has-danger' : !underlyingFormGroup.controls['largeLossesGL'].valid && underlyingFormGroup.controls['largeLossesGL'].touched}">
+																										<input type="text" class="form-control form-control-danger" formControlName="largeLossesGL" [(ngModel)]="quest.underlyingPolicies.primaryGeneralLiability.largeLosses">
+																									</div>
+																								</fieldset>
+																								<div class="col-sm-12">
+																									<div class="alert" [hidden]="hideLargeLossesGLErr">{{largeLossesGLMaxErrMsg}}</div>
+																								</div>
+																							</div>
+																						</div>
+																					</div>
+																				</fieldset>
+																			</div>
+																		</fieldset>
+																	</div>
+																</div>
+															</div>
+															<!--PRIMARY GL LARGE LOSSES-->
+															<div class="col-sm-12" [hidden]="hideIncdLargeLossesGL">
+																<div class="card-header card-default">
+																	<span style="color: black" translate>{{'underlyingPolicies.largeLosses'}}</span>
+																</div>
+																<div class="card mb-3">
+																	<div class="card-block">
+																		<div formArrayName="incurredLossesGL">
+																			<div *ngFor="let incurredLossGL of underlyingFormGroup.controls.incurredLossesGL.controls; let i=index" class="panel panel-default">
+																				<div [formGroupName]="i">
+																					<div class="row">
+																						<div class="col-sm-12">
+																							<label translate>
+																								{{'underlyingPolicies.incurredLosses'}}</label> {{i+1}}
+																						</div>
+																						<br>
+																						<div class="col-sm-6">
+																							<fieldset class="form-group">
+																								<div [ngClass]="{'form-group has-danger' : !underlyingFormGroup.controls['incurredLossesGL'].valid && underlyingFormGroup.controls['incurredLossesGL'].touched}">
+																									<input class="form-control" type="text" currencyMask [options]="{align:'left',allowNegative:false,precision:0}" formControlName="incurredLoss">
+																								</div>
+																							</fieldset>
+																						</div>
+																					</div>
+																					<br>
+																				</div>
+																			</div>
+																			<div class="alert" [hidden]="hideLargeIncdLossesGLErr" translate>{{'error.ineligible.largeLosses'}}</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</fieldset>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!--PRIMARY EL-->
+							<div *ngIf="quest.initialEligibility.primaryEL">
+								<div class="row">
+									<div class="col-sm-12">
+										<div class="card-header card-default">
+											<span style="color: black" translate>{{'underlyingPolicies.primaryEL'}}</span>
+										</div>
+										<div class="card mb-3">
+											<div class="card-block">
+												<div>
+													<!--PRIMARY EL FORM-->
+													<fieldset>
+														<div class="row">
+															<!--PRIMARY EL LEFT-->
+															<div class="col-sm-6">
+																<div class="card-header card-default"></div>
+																<div class="card mb-3">
+																	<div class="card-block">
+																		<fieldset class="form-group">
+																			<div class="row">
+																				<fieldset class="form-group">
+																					<div class="col-sm-12">
+																						<!--PRIMARY EL LEFT LIMIT-->
+																						<label class="form-control-label" translate>{{'underlyingPolicies.limit'}}<br></label><br>
+																						<div [ngClass]="{'form-group has-danger' : !underlyingFormGroup.controls['limitEL'].valid && underlyingFormGroup.controls['limitEL'].touched}">
+																							<input type="text" class="form-control form-control-danger" formControlName="limitEL" currencyMask [options]="{align:'left',allowNegative:false,precision:0}"
+																							 [(ngModel)]="quest.underlyingPolicies.primaryEmployersLiability.limit">
+																						</div>
+																					</div>
+																				</fieldset>
+																				<div class="col-sm-12">
+																					<div class="alert" [hidden]="hideLimitELErr" translate>{{'error.ineligible.limitEL'}}</div>
+																				</div>
+																			</div>
+																		</fieldset>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</fieldset>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row" style="position: relative; z-index: -1">
+	<div class="loader" style="position: absolute !important; top: 30%; left: 50%;" [hidden]="hideLoader"></div>
+</div>

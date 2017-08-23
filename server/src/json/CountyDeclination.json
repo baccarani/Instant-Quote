@@ -1,0 +1,596 @@
+[
+    {
+        "cntyCode": "AZ013",
+        "state": "AZ",
+        "FIPS": "13",
+        "county": "MARICOPA"
+    },
+    {
+        "cntyCode": "CA037",
+        "state": "CA",
+        "FIPS": "37",
+        "county": "LOS ANGELES"
+    },
+    {
+        "cntyCode": "CA059",
+        "state": "CA",
+        "FIPS": "59",
+        "county": "ORANGE"
+    },
+    {
+        "cntyCode": "CA073",
+        "state": "CA",
+        "FIPS": "73",
+        "county": "SAN DIEGO"
+    },
+    {
+        "cntyCode": "CA083",
+        "state": "CA",
+        "FIPS": "83",
+        "county": "SANTA BARBARA"
+    },
+    {
+        "cntyCode": "CA019",
+        "state": "CA",
+        "FIPS": "19",
+        "county": "FRESNO"
+    },
+    {
+        "cntyCode": "CA085",
+        "state": "CA",
+        "FIPS": "85",
+        "county": "SANTA CLARA"
+    },
+    {
+        "cntyCode": "CA075",
+        "state": "CA",
+        "FIPS": "75",
+        "county": "SAN FRANCISCO"
+    },
+    {
+        "cntyCode": "CA001",
+        "state": "CA",
+        "FIPS": "1",
+        "county": "ALAMEDA"
+    },
+    {
+        "cntyCode": "CA081",
+        "state": "CA",
+        "FIPS": "81",
+        "county": "SAN MATEO"
+    },
+    {
+        "cntyCode": "CA067",
+        "state": "CA",
+        "FIPS": "67",
+        "county": "SACRAMENTO"
+    },
+    {
+        "cntyCode": "CO031",
+        "state": "CO",
+        "FIPS": "31",
+        "county": "DENVER"
+    },
+    {
+        "cntyCode": "CO005",
+        "state": "CO",
+        "FIPS": "5",
+        "county": "ARAPAHOE"
+    },
+    {
+        "cntyCode": "CO001",
+        "state": "CO",
+        "FIPS": "1",
+        "county": "ADAMS"
+    },
+    {
+        "cntyCode": "CT001",
+        "state": "CT",
+        "FIPS": "1",
+        "county": "FAIRFIELD"
+    },
+    {
+        "cntyCode": "CT003",
+        "state": "CT",
+        "FIPS": "3",
+        "county": "HARTFORD"
+    },
+    {
+        "cntyCode": "CT013",
+        "state": "CT",
+        "FIPS": "13",
+        "county": "TOLLAND"
+    },
+    {
+        "cntyCode": "CT009",
+        "state": "CT",
+        "FIPS": "9",
+        "county": "NEW HAVEN"
+    },
+    {
+        "cntyCode": "DC001",
+        "state": "DC",
+        "FIPS": "1",
+        "county": "DISTRICT OF COLUMBIA"
+    },
+    {
+        "cntyCode": "DE003",
+        "state": "DE",
+        "FIPS": "3",
+        "county": "NEW CASTLE"
+    },
+    {
+        "cntyCode": "FL086",
+        "state": "FL",
+        "FIPS": "86",
+        "county": "MIAMI-DADE"
+    },
+    {
+        "cntyCode": "FL011",
+        "state": "FL",
+        "FIPS": "11",
+        "county": "BROWARD"
+    },
+    {
+        "cntyCode": "GA121",
+        "state": "GA",
+        "FIPS": "121",
+        "county": "FULTON"
+    },
+    {
+        "cntyCode": "HI003",
+        "state": "HI",
+        "FIPS": "3",
+        "county": "HONOLULU"
+    },
+    {
+        "cntyCode": "IL031",
+        "state": "IL",
+        "FIPS": "31",
+        "county": "COOK"
+    },
+    {
+        "cntyCode": "LA071",
+        "state": "LA",
+        "FIPS": "71",
+        "county": "ORLEANS"
+    },
+    {
+        "cntyCode": "LA051",
+        "state": "LA",
+        "FIPS": "51",
+        "county": "JEFFERSON"
+    },
+    {
+        "cntyCode": "MA013",
+        "state": "MA",
+        "FIPS": "13",
+        "county": "Hampden County"
+    },
+    {
+        "cntyCode": "MA027",
+        "state": "MA",
+        "FIPS": "27",
+        "county": "Worcester County"
+    },
+    {
+        "cntyCode": "MA017",
+        "state": "MA",
+        "FIPS": "17",
+        "county": "Middlesex County"
+    },
+    {
+        "cntyCode": "MA015",
+        "state": "MA",
+        "FIPS": "15",
+        "county": "Hampshire County"
+    },
+    {
+        "cntyCode": "MA009",
+        "state": "MA",
+        "FIPS": "9",
+        "county": "Essex County"
+    },
+    {
+        "cntyCode": "MA025",
+        "state": "MA",
+        "FIPS": "25",
+        "county": "Suffolk County"
+    },
+    {
+        "cntyCode": "MA021",
+        "state": "MA",
+        "FIPS": "21",
+        "county": "Norfolk County"
+    },
+    {
+        "cntyCode": "MA005",
+        "state": "MA",
+        "FIPS": "5",
+        "county": "Bristol County"
+    },
+    {
+        "cntyCode": "MD031",
+        "state": "MD",
+        "FIPS": "31",
+        "county": "MONTGOMERY"
+    },
+    {
+        "cntyCode": "MD033",
+        "state": "MD",
+        "FIPS": "33",
+        "county": "PRINCE GEORGE'S"
+    },
+    {
+        "cntyCode": "MD005",
+        "state": "MD",
+        "FIPS": "5",
+        "county": "BALTIMORE COUNTY"
+    },
+    {
+        "cntyCode": "MD510",
+        "state": "MD",
+        "FIPS": "510",
+        "county": "BALTIMORE CITY"
+    },
+    {
+        "cntyCode": "ME005",
+        "state": "ME",
+        "FIPS": "5",
+        "county": "CUMBERLAND"
+    },
+    {
+        "cntyCode": "MI065",
+        "state": "MI",
+        "FIPS": "65",
+        "county": "INGHAM"
+    },
+    {
+        "cntyCode": "MI163",
+        "state": "MI",
+        "FIPS": "163",
+        "county": "WAYNE"
+    },
+    {
+        "cntyCode": "MN053",
+        "state": "MN",
+        "FIPS": "53",
+        "county": "HENNEPIN"
+    },
+    {
+        "cntyCode": "MN123",
+        "state": "MN",
+        "FIPS": "123",
+        "county": "RAMSEY"
+    },
+    {
+        "cntyCode": "MO510",
+        "state": "MO",
+        "FIPS": "510",
+        "county": "ST. LOUIS CITY"
+    },
+    {
+        "cntyCode": "NJ003",
+        "state": "NJ",
+        "FIPS": "3",
+        "county": "BERGEN"
+    },
+    {
+        "cntyCode": "NJ031",
+        "state": "NJ",
+        "FIPS": "31",
+        "county": "PASSAIC"
+    },
+    {
+        "cntyCode": "NJ013",
+        "state": "NJ",
+        "FIPS": "13",
+        "county": "ESSEX"
+    },
+    {
+        "cntyCode": "NJ017",
+        "state": "NJ",
+        "FIPS": "17",
+        "county": "HUDSON"
+    },
+    {
+        "cntyCode": "NJ035",
+        "state": "NJ",
+        "FIPS": "35",
+        "county": "SOMERSET"
+    },
+    {
+        "cntyCode": "NJ023",
+        "state": "NJ",
+        "FIPS": "23",
+        "county": "MIDDLESEX"
+    },
+    {
+        "cntyCode": "NJ039",
+        "state": "NJ",
+        "FIPS": "39",
+        "county": "UNION"
+    },
+    {
+        "cntyCode": "NJ007",
+        "state": "NJ",
+        "FIPS": "7",
+        "county": "CAMDEN"
+    },
+    {
+        "cntyCode": "NJ021",
+        "state": "NJ",
+        "FIPS": "21",
+        "county": "MERCER"
+    },
+    {
+        "cntyCode": "NV003",
+        "state": "NV",
+        "FIPS": "3",
+        "county": "CLARK"
+    },
+    {
+        "cntyCode": "NY005",
+        "state": "NY",
+        "FIPS": "5",
+        "county": "BRONX"
+    },
+    {
+        "cntyCode": "NY119",
+        "state": "NY",
+        "FIPS": "119",
+        "county": "WESTCHESTER"
+    },
+    {
+        "cntyCode": "NY103",
+        "state": "NY",
+        "FIPS": "103",
+        "county": "SUFFOLK"
+    },
+    {
+        "cntyCode": "NY059",
+        "state": "NY",
+        "FIPS": "59",
+        "county": "NASSAU"
+    },
+    {
+        "cntyCode": "NY061",
+        "state": "NY",
+        "FIPS": "61",
+        "county": "NEW YORK"
+    },
+    {
+        "cntyCode": "NY085",
+        "state": "NY",
+        "FIPS": "85",
+        "county": "RICHMOND"
+    },
+    {
+        "cntyCode": "NY047",
+        "state": "NY",
+        "FIPS": "47",
+        "county": "KINGS"
+    },
+    {
+        "cntyCode": "NY081",
+        "state": "NY",
+        "FIPS": "81",
+        "county": "QUEENS"
+    },
+    {
+        "cntyCode": "NY001",
+        "state": "NY",
+        "FIPS": "1",
+        "county": "ALBANY"
+    },
+    {
+        "cntyCode": "NY093",
+        "state": "NY",
+        "FIPS": "93",
+        "county": "SCHENECTADY"
+    },
+    {
+        "cntyCode": "NY029",
+        "state": "NY",
+        "FIPS": "29",
+        "county": "ERIE"
+    },
+    {
+        "cntyCode": "NY063",
+        "state": "NY",
+        "FIPS": "63",
+        "county": "NIAGARA"
+    },
+    {
+        "cntyCode": "NY055",
+        "state": "NY",
+        "FIPS": "55",
+        "county": "MONROE"
+    },
+    {
+        "cntyCode": "NY067",
+        "state": "NY",
+        "FIPS": "67",
+        "county": "ONONDAGA"
+    },
+    {
+        "cntyCode": "OH035",
+        "state": "OH",
+        "FIPS": "35",
+        "county": "CUYAHOGA"
+    },
+    {
+        "cntyCode": "OH151",
+        "state": "OH",
+        "FIPS": "151",
+        "county": "STARK"
+    },
+    {
+        "cntyCode": "OH061",
+        "state": "OH",
+        "FIPS": "61",
+        "county": "HAMILTON"
+    },
+    {
+        "cntyCode": "OH049",
+        "state": "OH",
+        "FIPS": "49",
+        "county": "FRANKLIN"
+    },
+    {
+        "cntyCode": "OR051",
+        "state": "OR",
+        "FIPS": "51",
+        "county": "MULTNOMAH"
+    },
+    {
+        "cntyCode": "PA003",
+        "state": "PA",
+        "FIPS": "3",
+        "county": "ALLEGHENY"
+    },
+    {
+        "cntyCode": "PA027",
+        "state": "PA",
+        "FIPS": "27",
+        "county": "CENTRE"
+    },
+    {
+        "cntyCode": "PA043",
+        "state": "PA",
+        "FIPS": "43",
+        "county": "DAUPHIN"
+    },
+    {
+        "cntyCode": "PA133",
+        "state": "PA",
+        "FIPS": "133",
+        "county": "YORK"
+    },
+    {
+        "cntyCode": "PA045",
+        "state": "PA",
+        "FIPS": "45",
+        "county": "DELAWARE"
+    },
+    {
+        "cntyCode": "PA101",
+        "state": "PA",
+        "FIPS": "101",
+        "county": "PHILADELPHIA"
+    },
+    {
+        "cntyCode": "PA091",
+        "state": "PA",
+        "FIPS": "91",
+        "county": "MONTGOMERY"
+    },
+    {
+        "cntyCode": "PA077",
+        "state": "PA",
+        "FIPS": "77",
+        "county": "LEHIGH"
+    },
+    {
+        "cntyCode": "PA011",
+        "state": "PA",
+        "FIPS": "11",
+        "county": "BERKS"
+    },
+    {
+        "cntyCode": "RI007",
+        "state": "RI",
+        "FIPS": "7",
+        "county": "PROVIDENCE"
+    },
+    {
+        "cntyCode": "TN093",
+        "state": "TN",
+        "FIPS": "93",
+        "county": "KNOX"
+    },
+    {
+        "cntyCode": "TX113",
+        "state": "TX",
+        "FIPS": "113",
+        "county": "DALLAS"
+    },
+    {
+        "cntyCode": "TX085",
+        "state": "TX",
+        "FIPS": "85",
+        "county": "COLLIN"
+    },
+    {
+        "cntyCode": "TX201",
+        "state": "TX",
+        "FIPS": "201",
+        "county": "HARRIS"
+    },
+    {
+        "cntyCode": "TX157",
+        "state": "TX",
+        "FIPS": "157",
+        "county": "FORT BEND"
+    },
+    {
+        "cntyCode": "TX029",
+        "state": "TX",
+        "FIPS": "29",
+        "county": "BEXAR"
+    },
+    {
+        "cntyCode": "TX453",
+        "state": "TX",
+        "FIPS": "453",
+        "county": "TRAVIS"
+    },
+    {
+        "cntyCode": "UT035",
+        "state": "UT",
+        "FIPS": "35",
+        "county": "SALT LAKE"
+    },
+    {
+        "cntyCode": "VA013",
+        "state": "VA",
+        "FIPS": "13",
+        "county": "ARLINGTON"
+    },
+    {
+        "cntyCode": "VA059",
+        "state": "VA",
+        "FIPS": "59",
+        "county": "FAIRFAX COUNTY"
+    },
+    {
+        "cntyCode": "VA510",
+        "state": "VA",
+        "FIPS": "510",
+        "county": "ALEXANDRIA CITY"
+    },
+    {
+        "cntyCode": "VA710",
+        "state": "VA",
+        "FIPS": "710",
+        "county": "NORFOLK CITY"
+    },
+    {
+        "cntyCode": "WA033",
+        "state": "WA",
+        "FIPS": "33",
+        "county": "KING"
+    },
+    {
+        "cntyCode": "WI079",
+        "state": "WI",
+        "FIPS": "79",
+        "county": "MILWAUKEE"
+    },
+    {
+        "cntyCode": "WI025",
+        "state": "WI",
+        "FIPS": "25",
+        "county": "DANE"
+    }
+]

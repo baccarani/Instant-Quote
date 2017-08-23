@@ -1,0 +1,22 @@
+<button class="btn btn-default" id="toggle-sidebar" type="button"
+	(click)="eventCalled()">&#9776;</button>
+<nav class="sidebar sidebar-nav navbar-light"
+	[ngClass]="{sidebarPushRight: isActive}">
+	<ul class="nav">
+		<a routerLink="/dashboard/home"
+			[routerLinkActive]="['router-link-active']" class="list-group-item"
+			style="background-color: ;"> <span
+			style="color: black;"><i class="fa fa-home"></i> &nbsp; Home</span>
+		</a>
+		<a routerLink="/dashboard/quest"
+			[routerLinkActive]="['router-link-active']" class="list-group-item"
+			style="background-color: ;"> <span
+			style="color: black;"><i class="fa fa-edit"></i> &nbsp; Quote</span>
+		</a>
+		<!-- <div class="nested-menu">
+			<a class="list-group-item" (click)="addExpandClass('pages')">
+                  <span><i class="fa fa-cloud" style="color: #0275d8;;"></i> &nbsp; QUEST</span>
+              </a>
+		</div> -->
+	</ul>
+</nav>

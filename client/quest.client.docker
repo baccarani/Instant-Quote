@@ -1,0 +1,10 @@
+FROM httpd:2.4
+
+#Move source file from staging directory to web server
+COPY ./src/ /usr/local/apache2/htdocs/
+
+#Fix the permiossion for all the files in the container.
+RUN chmod 744 -R /usr/local/apache2/htdocs/*
+
+EXPOSE 80
+

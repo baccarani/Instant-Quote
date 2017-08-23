@@ -1,0 +1,355 @@
+<div class="col-lg-12">
+	<div class="row">
+		<div class="col-sm-12">
+			<div [ngClass]="setClassPanel(additionalFormGroup.valid, false)">
+				<div [ngClass]="setClassPanel(additionalFormGroup.valid, true)"
+					translate>{{'additionalDetails.additionalDetailsTitle'}}</div>
+				<div class="card-block bg-white">
+					<form [formGroup]="additionalFormGroup">
+						<div *ngIf="quest.initialEligibility.primaryAL">
+
+
+							<div class="card">
+								<div class="card-header">
+									<span class="cardTitle" style="color: black" translate>{{'applicantInfo.applicantInfoHeader'}}</span>
+								</div>
+								<div class="card-block">
+									<div class="row">
+										<fieldset class="form-group">
+											<div class="col-sm-6">
+												<label class="form-control-label" translate>{{'applicantInfo.applicantName'}}</label><br>
+												<input type="text" class="form-control"
+													[(ngModel)]="quest.initialEligibility.applicantInfo.applicantName"
+													formControlName="applicantName">
+											</div>
+											<div class="col-sm-6">
+												<label class="form-control-label" translate>{{'applicantInfo.address'}}</label><br>
+												<input type="text" class="form-control"
+													[(ngModel)]="quest.initialEligibility.applicantInfo.location"
+													formControlName="address">
+											</div>
+										</fieldset>
+									</div>
+								</div>
+							</div>
+
+
+							<div class="card">
+								<div class="card-header">
+									<span class="cardTitle" style="color: black" translate>{{'additionalDetails.AL.autoLiability'}}</span>
+									<span class="cardTitle" style="color: black" translate>{{'additionalDetails.primary/control'}}</span>
+								</div>
+								<div class="card-block">
+									<div class="row">
+										<fieldset class="form-group">
+											<div class="col-sm-8">
+												<label class="form-control-label" translate>{{'additionalDetails.insuranceCompany'}}</label><br>
+												<input type="text" class="form-control"
+													[(ngModel)]="quest.additionalDetails.primaryAutoLiability.insuranceCompany"
+													formControlName="insuranceCompanyAL">
+											</div>
+										</fieldset>
+									</div>
+									<div class="row">
+										<fieldset class="form-group">
+											<div class="col-sm-6">
+												<label class="form-control-label" translate>{{'additionalDetails.policyNumber'}}</label><br>
+												<input type="text" class="form-control"
+													[(ngModel)]="quest.additionalDetails.primaryAutoLiability.policyNumber"
+													formControlName="policyNumberAL">
+											</div>
+										</fieldset>
+									</div>
+									<div class="row">
+										<fieldset class="form-group">
+											<div class="col-sm-12">
+												<div class="row">
+													<div class="col-sm-6">
+														<label class="form-control-label" translate>{{'additionalDetails.effDate'}}</label><br>
+														<div
+															[ngClass]="{'form-group has-danger' : !additionalFormGroup.controls['effDateAL'].valid && additionalFormGroup.controls['effDateAL'].dirty}">
+															<my-date-picker id="effDateAL"
+																style="padding: 0px; border: 0"
+																[options]="myDatePickerOptions"
+																class="form-control form-control-danger"
+																formControlName="effDateAL" [(ngModel)]="effDtModelAL"
+																[placeholder]="datePlaceholder"> </my-date-picker>
+														</div>
+													</div>
+													<div class="col-sm-12">
+														<div class="alert" [hidden]="hideEffDateALErr" translate>{{effDateErrorMsg}}</div>
+													</div>
+													<div class="col-sm-6">
+														<label class="form-control-label" translate>{{'additionalDetails.expDate'}}</label><br>
+														<div
+															[ngClass]="{'form-group has-danger' : !additionalFormGroup.controls['expDateAL'].valid && additionalFormGroup.controls['expDateAL'].dirty}">
+															<my-date-picker id="expDateAL"
+																style="padding: 0px; border: 0"
+																[options]="myDatePickerOptions"
+																class="form-control form-control-danger"
+																formControlName="expDateAL" [(ngModel)]="expDtModelAL"
+																[placeholder]="datePlaceholder"> </my-date-picker>
+														</div>
+													</div>
+													<div class="col-sm-12">
+														<div class="alert" [hidden]="hideExpDateALErr" translate>{{'error.ineligible.expDateExcess'}}</div>
+													</div>
+												</div>
+											</div>
+										</fieldset>
+									</div>
+									<div class="card">
+										<div class="card-header">
+											<span class="cardTitle" style="color: black" translate>{{'additionalDetails.limitDetail'}}</span>
+										</div>
+										<div class="card-block">
+											<fieldset class="form-group">
+												<div formArrayName="scheduledAL">
+													<div
+														*ngFor="let scheduledAL of additionalFormGroup.controls.scheduledAL.controls; let i=index"
+														class="panel panel-default" style="padding: 20px;">
+														<div [formGroupName]="i">
+															<div class="row">
+																<div class="col-sm-2">
+																	<input class="form-control" type="text"
+																		formControlName="limit" currencyMask
+																		[options]="{align:'left',allowNegative:false,precision:0}"
+																		[(ngModel)]="quest.additionalDetails.primaryAutoLiability.scheduleLimits[i].limit">
+																</div>
+																<div class="col-sm-10">
+																	<textarea style="resize: none" class="form-control"
+																		type="text" formControlName="limitLabel"
+																		[(ngModel)]="quest.additionalDetails.primaryAutoLiability.scheduleLimits[i].limitLabel"></textarea>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</fieldset>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div *ngIf="quest.initialEligibility.primaryGL">
+							<div class="card">
+								<div class="card-header">
+									<span class="cardTitle" style="color: black" translate>{{'additionalDetails.GL.commercialGL'}}</span>
+									<span class="cardTitle" style="color: black" translate>{{'additionalDetails.primary/control'}}</span>
+								</div>
+								<div class="card-block">
+									<div class="row">
+										<fieldset class="form-group">
+											<div class="col-sm-8">
+												<label class="form-control-label" translate>{{'additionalDetails.insuranceCompany'}}</label><br>
+												<input type="text" class="form-control"
+													[(ngModel)]="quest.additionalDetails.primaryGeneralLiability.insuranceCompany"
+													formControlName="insuranceCompanyGL">
+											</div>
+										</fieldset>
+									</div>
+									<div class="row">
+										<fieldset class="form-group">
+											<div class="col-sm-6">
+												<label class="form-control-label" translate>{{'additionalDetails.policyNumber'}}</label><br>
+												<input type="text" class="form-control"
+													[(ngModel)]="quest.additionalDetails.primaryGeneralLiability.policyNumber"
+													formControlName="policyNumberGL">
+											</div>
+										</fieldset>
+									</div>
+									<div class="row">
+										<fieldset class="form-group">
+											<div class="col-sm-12">
+												<div class="row">
+													<div class="col-sm-6">
+														<label class="form-control-label" translate>{{'additionalDetails.effDate'}}</label><br>
+														<div
+															[ngClass]="{'form-group has-danger' : !additionalFormGroup.controls['effDateGL'].valid && additionalFormGroup.controls['effDateGL'].dirty}">
+															<my-date-picker id="effDateGL"
+																style="padding: 0px; border: 0"
+																[options]="myDatePickerOptions"
+																class="form-control form-control-danger"
+																formControlName="effDateGL" [(ngModel)]="effDtModelGL"
+																[placeholder]="datePlaceholder"> </my-date-picker>
+														</div>
+													</div>
+													<div class="col-sm-12">
+														<div class="alert" [hidden]="hideEffDateGLErr" translate>{{effDateErrorMsg}}</div>
+													</div>
+													<div class="col-sm-6">
+														<label class="form-control-label" translate>{{'additionalDetails.expDate'}}</label><br>
+														<div
+															[ngClass]="{'form-group has-danger' : !additionalFormGroup.controls['expDateGL'].valid && additionalFormGroup.controls['expDateGL'].dirty}">
+															<my-date-picker id="expDateGL"
+																style="padding: 0px; border: 0"
+																[options]="myDatePickerOptions"
+																class="form-control form-control-danger"
+																formControlName="expDateGL" [(ngModel)]="expDtModelGL"
+																[placeholder]="datePlaceholder"> </my-date-picker>
+														</div>
+													</div>
+													<div class="col-sm-12">
+														<div class="alert" [hidden]="hideExpDateGLErr" translate>{{'error.ineligible.expDateExcess'}}</div>
+													</div>
+												</div>
+											</div>
+										</fieldset>
+									</div>
+									<div class="row">
+										<fieldset class="form-group">
+											<div class="col-sm-6">
+												<label class="form-control-label" translate>{{'additionalDetails.GL.coverage'}}</label><br>
+												<input type="text" class="form-control"
+													[(ngModel)]="quest.additionalDetails.primaryGeneralLiability.coverage"
+													formControlName="coverage" readonly>
+											</div>
+										</fieldset>
+									</div>
+									<div class="row">
+										<fieldset class="form-group">
+											<div class="col-sm-6">
+												<label class="form-control-label" translate>{{'additionalDetails.GL.defenseCosts'}}</label><br>
+												<input type="text" class="form-control"
+													[(ngModel)]="quest.additionalDetails.primaryGeneralLiability.defenseCosts"
+													formControlName="defenseCosts" readonly>
+											</div>
+										</fieldset>
+									</div>
+									<br>
+									<div class="card">
+										<div class="card-header">
+											<span class="cardTitle" style="color: black" translate>{{'additionalDetails.limitDetail'}}</span>
+										</div>
+										<div class="card-block">
+											<fieldset class="form-group">
+												<div formArrayName="scheduledGL">
+													<div
+														*ngFor="let scheduledGL of additionalFormGroup.controls.scheduledGL.controls; let i=index"
+														class="panel panel-default" style="padding: 20px;">
+														<div [formGroupName]="i">
+															<div class="row">
+																<div class="col-sm-2">
+																	<input class="form-control" type="text"
+																		formControlName="limit" currencyMask
+																		[options]="{align:'left',allowNegative:false,precision:0}"
+																		[(ngModel)]="quest.additionalDetails.primaryGeneralLiability.scheduleLimits[i].limit">
+																</div>
+																<div class="col-sm-10">
+																	<textarea style="resize: none" class="form-control"
+																		type="text" formControlName="limitLabel"
+																		[(ngModel)]="quest.additionalDetails.primaryGeneralLiability.scheduleLimits[i].limitLabel"></textarea>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</fieldset>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div *ngIf="quest.initialEligibility.primaryEL">
+							<div class="card">
+								<div class="card-header">
+									<span class="cardTitle" style="color: black" translate>{{'additionalDetails.EL.employerLiability'}}</span>
+									<span class="cardTitle" style="color: black" translate>{{'additionalDetails.primary/control'}}</span>
+								</div>
+								<div class="card-block">
+									<div class="row">
+										<fieldset class="form-group">
+											<div class="col-sm-8">
+												<label class="form-control-label" translate>{{'additionalDetails.insuranceCompany'}}</label><br>
+												<input type="text" class="form-control"
+													[(ngModel)]="quest.additionalDetails.primaryEmployersLiability.insuranceCompany"
+													formControlName="insuranceCompanyEL">
+											</div>
+										</fieldset>
+									</div>
+									<div class="row">
+										<fieldset class="form-group">
+											<div class="col-sm-6">
+												<label class="form-control-label" translate>{{'additionalDetails.policyNumber'}}</label><br>
+												<input type="text" class="form-control"
+													[(ngModel)]="quest.additionalDetails.primaryEmployersLiability.policyNumber"
+													formControlName="policyNumberEL">
+											</div>
+										</fieldset>
+									</div>
+									<div class="row">
+										<fieldset class="form-group">
+											<div class="col-sm-12">
+												<div class="row">
+													<div class="col-sm-6">
+														<label class="form-control-label" translate>{{'additionalDetails.effDate'}}</label><br>
+														<div
+															[ngClass]="{'form-group has-danger' : !additionalFormGroup.controls['effDateEL'].valid && additionalFormGroup.controls['effDateEL'].dirty}">
+															<my-date-picker id="effDateEL"
+																style="padding: 0px; border: 0"
+																[options]="myDatePickerOptions"
+																class="form-control form-control-danger"
+																formControlName="effDateEL" [(ngModel)]="effDtModelEL"
+																[placeholder]="datePlaceholder"> </my-date-picker>
+														</div>
+													</div>
+													<div class="col-sm-12">
+														<div class="alert" [hidden]="hideEffDateELErr" translate>{{effDateErrorMsg}}</div>
+													</div>
+													<div class="col-sm-6">
+														<label class="form-control-label" translate>{{'additionalDetails.expDate'}}</label><br>
+														<div
+															[ngClass]="{'form-group has-danger' : !additionalFormGroup.controls['expDateEL'].valid && additionalFormGroup.controls['expDateEL'].dirty}">
+															<my-date-picker id="expDateEL"
+																style="padding: 0px; border: 0"
+																[options]="myDatePickerOptions"
+																class="form-control form-control-danger"
+																formControlName="expDateEL" [(ngModel)]="expDtModelEL"
+																[placeholder]="datePlaceholder"> </my-date-picker>
+														</div>
+													</div>
+													<div class="col-sm-12">
+														<div class="alert" [hidden]="hideExpDateELErr" translate>{{'error.ineligible.expDateExcess'}}</div>
+													</div>
+												</div>
+											</div>
+										</fieldset>
+									</div>
+									<div class="card">
+										<div class="card-header">
+											<span class="cardTitle" style="color: black" translate>{{'additionalDetails.limitDetail'}}</span>
+										</div>
+										<div class="card-block">
+											<fieldset class="form-group">
+												<div formArrayName="scheduledEL">
+													<div
+														*ngFor="let scheduledEL of additionalFormGroup.controls.scheduledEL.controls; let i=index"
+														class="panel panel-default" style="padding: 20px;">
+														<div [formGroupName]="i">
+															<div class="row">
+																<div class="col-sm-2">
+																	<input class="form-control" type="text"
+																		formControlName="limit" currencyMask
+																		[options]="{align:'left',allowNegative:false,precision:0}"
+																		[(ngModel)]="quest.additionalDetails.primaryEmployersLiability.scheduleLimits[i].limit">
+																</div>
+																<div class="col-sm-10">
+																	<textarea style="resize: none" class="form-control"
+																		type="text" formControlName="limitLabel"
+																		[(ngModel)]="quest.additionalDetails.primaryEmployersLiability.scheduleLimits[i].limitLabel"></textarea>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</fieldset>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>

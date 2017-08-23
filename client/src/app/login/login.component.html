@@ -1,0 +1,45 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-4 col-md-offset-4">
+			<div class="login-panel panel panel-default" style="margin-top: 50%;">
+				<div class="login-panel panel panel-default">
+					<div class="panel-heading"
+						style="padding: 50px; text-align: center">
+						<img src="../../../assets/img/logo_cf_square.png">
+						<h1 translate>
+							<br>{{'quest.questTitle'}}
+						</h1>
+					</div>
+					<div class="panel-body">
+						<form role="form" (ngSubmit)="onSubmit()" #loginForm="ngForm">
+							<fieldset>
+								<div class="form-content">
+									<div class="form-group">
+										<input [(ngModel)]="auth.user.username" type="text"
+											ng-model="name" class="form-control input-underline input-lg"
+											id="username" name="username"
+											placeholder="{{userPlaceHolder}}" autofocus required
+											minlength="5">
+									</div>
+
+									<div class="form-group">
+										<input [(ngModel)]="auth.user.password" type="password"
+											class="form-control input-underline input-lg" id="password"
+											name="password" placeholder="{{pwdPlaceHolder}}" required>
+									</div>
+								</div>
+								<button type="submit" class="btn btn-lg btn-primary btn-block"
+									[disabled]="!loginForm.form.valid" translate>{{'login.loginButtonText'}}</button>
+							</fieldset>
+						</form>
+					</div>
+					<br>
+					<div [hidden]="hideErr" class="panel-footer">
+						<div class="alert alert-danger" style="text-align: center">
+							<strong>{{errorMsg}}</strong>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>

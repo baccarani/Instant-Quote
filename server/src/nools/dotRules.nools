@@ -1,0 +1,101 @@
+
+define InitialEligibility {
+    initialEligibility : null,
+    cntyCode : "",
+    constructor : function(initialEligibilityObj,cntyCode) {
+        this.initialEligibility = initialEligibilityObj;
+        this.cntyCode = cntyCode
+    }
+}
+
+define ZipDeclination {
+    zipDeclination : null,
+    constructor : function(zipDeclinationObj) {
+        this.zipDeclination = zipDeclinationObj;
+    }
+}
+
+define ZipCountyMap {
+    zipCountyMap : null,
+    constructor : function(zipCountyMapObj) {
+        this.zipCountyMap = zipCountyMapObj;
+    }
+}
+
+define CountyDeclination {
+    countyDeclination : null,
+    constructor : function(countyDeclinationObj) {
+        this.countyDeclination = countyDeclinationObj;
+    }
+}
+
+function zipDeclinationContains(initElgZip,zipList){
+    console.log("Running zip");
+    for(var zipObj of zipList){        
+        if(zipObj.ZIP == initElgZip.initialEligibility.applicantInfo.zip ){
+            return true;
+        }
+    }
+    return false;
+}
+
+function assignCounty(initElgZip,zipCountyList){
+    console.log("Running zip map");
+    for(var zipCntyObj of zipCountyList){        
+        if(zipCntyObj.zip == initElgZip.initialEligibility.applicantInfo.zip ){        
+            return zipCntyObj.cntyCode;
+        }
+    }
+    return "";
+}
+
+function countyDeclinationContains(initElgCnty,countyList){
+    console.log(initElgCnty);
+    console.log("Running cnty");
+    for(var cntyObj of countyList){        
+        if(cntyObj.cntyCode == initElgCnty.cntyCode ){
+            console.log("matched -cnty dec");
+            return true;
+        }
+    }
+    return false;
+}
+
+rule ZipDeclination{    
+    when {
+        m : InitialEligibility ;
+        z : ZipDeclination   m.initialEligibility.dot != 0 AND m.initialEligibility.declined != "Y" AND m.cntyCode == "" AND zipDeclinationContains(m,z.zipDeclination)
+    }
+    then {
+        modify(m,function(){
+            m.initialEligibility.declined = "Y";
+            this.initialEligibility = m.initialEligibility;
+        });
+    }
+}
+
+rule AssignZip{    
+    when {
+        m : InitialEligibility m.initialEligibility.dot != 0 AND m.initialEligibility.declined != "Y" AND m.cntyCode == "";
+        z : ZipCountyMap
+    }
+    then {
+        modify(m, function(){
+            m.cntyCode = assignCounty(m,z.zipCountyMap);
+            this.initialEligibility = m.initialEligibility;
+        });
+    }
+}
+
+rule CountyDeclination{    
+    when {
+        m : InitialEligibility;
+        z : CountyDeclination m.initialEligibility.dot != 0 AND m.initialEligibility.declined != "Y" AND m.cntyCode != "" AND countyDeclinationContains(m,z.countyDeclination)
+    }
+    then {
+        modify(m, function(){
+            m.initialEligibility.declined = "Y";
+            this.initialEligibility = m.initialEligibility;
+        });
+    }
+}

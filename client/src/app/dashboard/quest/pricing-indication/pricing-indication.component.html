@@ -1,0 +1,263 @@
+<!--PRICING-INDICATION-->
+<div class="col-lg-12">
+	<div class="row">
+		<div class="col-sm-12">
+			<div [ngClass]="setClassPanel(pricingFormGroup.valid, false)">
+				<div [ngClass]="setClassPanel(pricingFormGroup.valid, true)"
+					translate>
+					{{'pricingIndication.pricingIndicationTitle'}}
+					<div class="cardTitle" translate>{{'pricingIndication.pricingDisclaimer'}}</div>
+				</div>
+				<!--FLEET ENTRY BODY-->
+				<div class="card-block bg-white">
+					<!--BODY-->
+					<!-- <form [formGroup]="fleetFormGroup"> -->
+					<form [formGroup]="pricingFormGroup">
+						<fieldset class="form-group">
+							<div class="col-sm-12">
+								<div class="card">
+									<div class="card-header"></div>
+									<div class="card-block">
+										<div class="row">
+											<div class="col-sm-12" style="text-align: center" translate>{{'pricingIndication.premiumSelect'}}
+											</div>
+										</div><br>
+										<div class="table-responsive" style="overflow-x: hidden">
+											<table class="table">
+												<thead class="thead-neutral">
+													<tr>
+														<th>
+															<div class="row">
+																<div class="col-sm-6" style="text-align: center"
+																	translate>{{'pricingIndication.excessLimit'}}</div>
+																<div class="col-sm-6" style="text-align: center"
+																	translate>{{'pricingIndication.riskPremium'}}</div>
+															</div>
+														</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td>
+															<div formArrayName="excessLimits">
+																<div
+																	*ngFor="let excessLimitObj of pricingFormGroup.controls.excessLimits.controls; let i=index"
+																	class="panel panel-default">
+																	<div [formGroupName]="i">
+																		<div class="row">
+																			<div class="col-sm-6">
+																				<input class="form-control"
+																					formControlName="excessLimit" readonly
+																					style="text-align: center">
+																			</div>
+																			<div class="col-sm-6">
+																				<div class="input-group">
+																					<input class="form-control" type="text"
+																						[(ngModel)]="quest.pricingIndication.pricing[i].riskPremium"
+																						formControlName="riskPremium" currencyMask
+																						[options]="{align:'center',allowNegative:false,precision:0}"
+																						readonly [attr.disabled]="true"> <span
+																						class="input-group-btn">
+																						<div class="btn btn-secondary">
+																							<input type="radio"
+																								[(ngModel)]="quest.pricingIndication.selectedPremium"
+																								formControlName="selectedPremium"
+																								name="selectedPremium" value="{{i}}">
+																						</div>
+																					</span> <input type="text" value="{{i}}"
+																						[(ngModel)]="quest.pricingIndication.pricing[i].value"
+																						formControlName="value" name="value" hidden>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																	<!-- Keep this tr to have proper alignment.-->
+																	<tr>
+																		<td></td>
+																	</tr>
+																</div>
+															</div>
+														</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+						</fieldset>
+						<div class="row" [hidden]="hideAdditionalPricing">
+							<fieldset class="col-sm-12">
+								<div class="col-sm-6">
+									<div class="card">
+										<div class="card-header">
+											<span style="color: black" translate>{{'pricingIndication.premium'}}</span>
+										</div>
+										<div class="card-block">
+											<div class="row">
+												<fieldset class="form-group">
+													<div class="col-sm-7">
+														<label class="form-control-label" translate>{{'pricingIndication.riskPremium'}}</label><br>
+														<input type="text" class="form-control"
+															formControlName="riskPremiumCustom" currencyMask
+															[options]="{align:'left',allowNegative:false,precision:0}"
+															[(ngModel)]="quest.pricingIndication.premium.riskPremium">
+													</div>
+													<div class="col-sm-5">
+														<label class="form-control-label" translate>{{'pricingIndication.riskPercent'}}</label>
+														<input type="text" class="form-control"
+															formControlName="riskPercent"
+															[(ngModel)]="quest.pricingIndication.premium.riskPercent"
+															readonly>
+													</div>
+												</fieldset>
+												<div class="col-sm-12">
+													<div class="alert" [hidden]="hideRiskPremiumErr">{{minRiskPremiumErrorMsg}}</div>
+												</div>
+											</div>
+											<div class="row">
+												<fieldset class="form-group">
+													<div class="col-sm-7">
+														<label class="form-control-label" translate>{{'pricingIndication.triaPremium'}}</label><br>
+														<input type="text" class="form-control"
+															formControlName="triaPremium" currencyMask
+															[options]="{align:'left',allowNegative:false,precision:0}"
+															[(ngModel)]="quest.pricingIndication.premium.triaPremium"
+															readonly [attr.disabled]="true">
+													</div>
+													<div class="col-sm-5">
+														<label class="form-control-label" translate>{{'pricingIndication.triaPercent'}}</label><br>
+														<input type="text" class="form-control"
+															formControlName="triaPercent"
+															[(ngModel)]="quest.pricingIndication.premium.triaPercent"
+															readonly>
+													</div>
+												</fieldset>
+											</div>
+											<div class="row">
+												<fieldset class="form-group">
+													<div class="col-sm-7">
+														<label class="form-control-label" translate>{{'pricingIndication.insurerProcessingFee'}}</label><br>
+														<input type="text" class="form-control"
+															formControlName="insurerProcessingFee" currencyMask
+															[options]="{align:'left',allowNegative:false,precision:0}"
+															[(ngModel)]="quest.pricingIndication.premium.insurerProcessingFee"
+															readonly [attr.disabled]="true">
+													</div>
+												</fieldset>
+											</div>
+											<div class="row">
+												<fieldset class="form-group">
+													<div class="col-sm-7">
+														<label class="form-control-label" translate>{{'pricingIndication.totalInsrPrmFees'}}</label><br>
+														<input type="text" class="form-control"
+															formControlName="totalInsrPrmFees" currencyMask
+															[options]="{align:'left',allowNegative:false,precision:0}"
+															[(ngModel)]="quest.pricingIndication.premium.totalInsrPrmFees"
+															readonly [attr.disabled]="true">
+													</div>
+												</fieldset>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="card">
+										<div class="card-header">
+											<span style="color: black" translate>{{'pricingIndication.additionalTerms'}}</span>
+										</div>
+										<div class="card-block">
+											<div class="row">
+												<fieldset class="form-group">
+													<div class="col-sm-12">
+														<label class="form-control-label" translate>{{'pricingIndication.premiumBasis'}}</label><br>
+														<input type="text" class="form-control"
+															formControlName="premiumBasis"
+															[(ngModel)]="quest.pricingIndication.additionalTerms.premiumBasis"
+															readonly>
+													</div>
+												</fieldset>
+											</div>
+											<div class="row">
+												<fieldset class="form-group">
+													<div class="col-sm-12">
+														<label class="form-control-label" translate>{{'pricingIndication.minEarnedAtInception'}}</label><br>
+														<input type="text" class="form-control"
+															formControlName="minEarnedAtInception"
+															[(ngModel)]="quest.pricingIndication.additionalTerms.minEarnedAtInception"
+															readonly>
+													</div>
+												</fieldset>
+											</div>
+											<div class="row">
+												<fieldset class="form-group">
+													<div class="col-sm-12">
+														<label class="form-control-label" translate>{{'pricingIndication.commission'}}</label><br>
+														<input type="text" class="form-control"
+															formControlName="commission"
+															[(ngModel)]="quest.pricingIndication.additionalTerms.commission"
+															readonly>
+													</div>
+												</fieldset>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-12">
+									<div class="card">
+										<div class="card-header">
+											<span style="color: black" translate>{{'pricingIndication.additionalCharges'}}</span>
+										</div>
+										<div class="card-block">
+											<div class="row">
+												<fieldset class="form-group">
+													<div class="col-sm-4">
+														<label class="form-control-label" translate>{{'pricingIndication.brokerPolicyFee'}}</label><br>
+														<div
+															[ngClass]="{'form-group has-danger' : !pricingFormGroup.controls['brokerPolicyFee'].valid && pricingFormGroup.controls['brokerPolicyFee'].touched}">
+															<input type="text"
+																class="form-control form-control-danger"
+																formControlName="brokerPolicyFee" currencyMask
+																[options]="{align:'left',allowNegative:false,precision:0}"
+																[(ngModel)]="quest.pricingIndication.additionalCharges.brokerPolicyFee">
+														</div>
+													</div>
+												</fieldset>
+											</div>
+											<div class="row">
+												<fieldset class="form-group">
+													<div class="col-sm-4">
+														<label class="form-control-label" translate>{{'pricingIndication.surplusLinesTaxesFees'}}</label><br>
+														<div
+															[ngClass]="{'form-group has-danger' : !pricingFormGroup.controls['surplusLinesTaxesFees'].valid && pricingFormGroup.controls['surplusLinesTaxesFees'].touched}">
+															<input type="text"
+																class="form-control form-control-danger"
+																formControlName="surplusLinesTaxesFees" currencyMask
+																[options]="{align:'left',allowNegative:false,precision:2}"
+																[(ngModel)]="quest.pricingIndication.additionalCharges.surplusLinesTaxesFees">
+														</div>
+													</div>
+												</fieldset>
+											</div>
+											<div class="row">
+												<fieldset class="form-group">
+													<div class="col-sm-4">
+														<label class="form-control-label" translate>{{'pricingIndication.totalPremiumTaxesFees'}}</label><br>
+														<input type="text" class="form-control"
+															formControlName="totalPremiumTaxesFees" currencyMask
+															[options]="{align:'left',allowNegative:false,precision:2}"
+															[(ngModel)]="quest.pricingIndication.additionalCharges.totalPremiumTaxesFees"
+															readonly [attr.disabled]="true">
+													</div>
+												</fieldset>
+											</div>
+										</div>
+									</div>
+								</div>
+							</fieldset>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>

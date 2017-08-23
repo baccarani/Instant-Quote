@@ -1,0 +1,57 @@
+<div class="col-lg-12">
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="card card-primary card-inverse mb-3">
+				<div class="card-header card-primary" translate>Form Selection
+				</div>
+				<div class="card-block bg-white">
+					<form [formGroup]="formsFormGroup">
+						<fieldset class="form-group">
+							<div id="accordion" role="tablist" aria-multiselectable="true">
+								<div formArrayName="forms">
+									<div
+										*ngFor="let formSelect of formsFormGroup.controls.forms.controls; let i=index"
+										class="panel panel-default">
+										<div [formGroupName]="i">
+											<div class="card">
+												<div class="card-header" role="tab">
+													<input type="checkbox"
+														[(ngModel)]="quest.forms.formList[i].isSelected"
+														formControlName="isSelected" name="isSelected"> <a
+														data-toggle="collapse" data-parent="#accordion"
+														href="#inputs-{{i}}" aria-expanded="true">&nbsp;{{quest.forms.formList[i].formName}}<span
+														*ngIf="quest.forms.formList[i].inputs.length > 0"
+														style="float: right" class="fa fa-caret-down fa-2x"></span></a>
+												</div>
+
+
+												<div formArrayName="formInput">
+													<div
+														*ngFor="let input of formSelect.controls['formInput'].controls let j=index"
+														class="panel panel-default">
+														<div [formGroupName]="j">
+															<div id="inputs-{{i}}" class="collapse show"
+																role="tabpanel" aria-labelledby="headingOne">
+																<div class="card-block">
+																	<label>{{quest.forms.formList[i].inputs[j].inputDesc}}</label>
+																	<textarea class="form-control" rows="3"
+																		formControlName="inputData"
+																		[(ngModel)]="quest.forms.formList[i].inputs[j].inputData"></textarea>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+
+									</div>
+								</div>
+							</div>
+						</fieldset>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

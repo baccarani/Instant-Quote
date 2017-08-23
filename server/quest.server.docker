@@ -1,0 +1,20 @@
+FROM node:boron
+
+# Create app directory
+RUN mkdir -p /usr/app/quest/server/src
+
+# Install app dependencies
+COPY ./package.json /usr/app/quest/server/
+WORKDIR /usr/app/quest/server
+RUN npm install
+
+# Move source files to the containter
+COPY ./src/ /usr/app/quest/server/src/
+WORKDIR /usr/app/quest/server/src
+
+#Fix the permiossion for all the files in the container.
+RUN chmod 744 -R /usr/app/quest/server/src/*
+
+EXPOSE 8080
+CMD [ "npm", "start" ]
+

@@ -1,0 +1,93 @@
+.alert {
+	color: rgb(221, 44, 0);
+	font-family: 'Bern Sans CT', sans-serif;
+	padding: 7px;
+	font-size: .9em;
+	margin-bottom: 20px;
+	display: inline-block;
+	animation: 2s alertAnim forwards;
+}
+
+@keyframes alertAnim {
+	from {
+	 	opacity:0;
+		transform: translateY(-20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+input[type=date]::-webkit-clear-button, input::-webkit-inner-spin-button,
+	input::-webkit-outer-spin-button {
+	-webkit-appearance: none;
+	opacity: 0;
+}
+
+input[type="date"] {
+	position: relative;
+	height: 41px;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+	color: transparent;
+	z-index: 5;
+}
+
+input[type="date"]:before {
+	color: transparent;
+	background: none;
+	display: block;
+	font-family: 'FontAwesome';
+	content: '\f073';
+	width: 15px;
+	height: 20px;
+	position: absolute;
+	top: .8px;
+	right: 39px;
+	color: black;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator:hover {
+	background-color: black;
+	opacity: .1;
+}
+
+.disclaimers {
+	padding: 2px;
+	display: inline;
+	font-size: 12px;
+}
+
+.cardTitle {
+	padding: 2px;
+	display: inline;
+}
+
+:host> >> my-date-picker> >> .mydpicon {
+	font-size: 14px !important;
+	font-weight: 500 !important;
+	color: #55595c !important;
+}
+
+:host> >> my-date-picker> >> .btnpicker {
+	width: 40px;
+	background: #d1d4d7;
+}
+
+.overlay {
+	background-color: white;
+	pointer-events: none;
+	width: 100%;
+	height: 100%;
+	z-index: 1000;
+	top: 0px;
+	left: 0px;
+	opacity: .3; /* in FireFox */
+	filter: alpha(opacity = 30); /* in IE */
+}
+
+.modal-body {
+	position: fixed;	
+}

@@ -1,0 +1,115 @@
+
+<form [formGroup]="subjectivitiesFormGroup">
+	<div class="col-lg-12">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="card card-primary card-inverse mb-3">
+					<div class="card-header card-primary" translate>
+						Subjectivities & Terms</div>
+					<div class="card-block bg-white">
+						<!--BODY-->
+						<!--<form>-->
+						<fieldset class="form-group">
+							<div class="row">
+								<div class="col-xl-12 col-lg-12">
+									<div class="card card-block">
+										<div class="table-responsive" style="overflow-x: hidden">
+											<table class="table">
+												<tbody>
+													<tr>
+														<td>
+															<div formArrayName="subjectivities">
+																<div
+																	*ngFor="let subjectivityInfo of subjectivitiesFormGroup.controls.subjectivities.controls; let i=index"
+																	class="panel panel-default">
+																	<div [formGroupName]="i">
+																		<div class="row">
+																			<div class="col-sm-12">
+																				<input class="form-control" type="text"
+																					formControlName="subjText" style="text-align: left">
+																			</div>
+																		</div>
+																	</div>
+																	<!-- Keep this tr to have proper alignment.-->
+																	<tr>
+																		<td></td>
+																	</tr>
+																</div>
+															</div>
+														</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+						</fieldset>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-12"></div>
+		</div>
+
+
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="card card-primary card-inverse mb-3">
+					<div class="card-header card-primary" translate>Notes</div>
+					<div class="card-block bg-white">
+						<!--BODY-->
+						<!--<form>-->
+						<fieldset class="form-group">
+							<div class="row">
+								<div class="col-xl-12 col-lg-12">
+									<div class="card card-block">
+										<div class="table-responsive" style="overflow-x: hidden">
+											<table class="table">
+												<tbody>
+													<tr>
+														<td>
+															<div formArrayName="notes">
+																<div
+																	*ngFor="let noteInfo of subjectivitiesFormGroup.controls.notes.controls; let i=index"
+																	class="panel panel-default">
+																	<div [formGroupName]="i">
+																		<div class="row">
+																			<div class="col-sm-12">
+																				<input class="form-control" type="text"
+																					formControlName="noteText" style="text-align: left">
+																			</div>
+																		</div>
+																	</div>
+																	<!-- Keep this tr to have proper alignment.-->
+																	<tr>
+																		<td></td>
+																	</tr>
+																</div>
+															</div>
+														</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+						</fieldset>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+</form>
+
+
+
+
+
+

@@ -1,0 +1,75 @@
+<!--FLEET ENTRY-->
+<div class="col-lg-12">
+	<div class="row">
+		<div class="col-sm-12">
+			<div [ngClass]="setClassPanel(fleetFormGroup.valid, false)">
+				<div [ngClass]="setClassPanel(fleetFormGroup.valid, true)" translate>
+					{{'fleetEntry.fleetEntryTitle'}}</div>
+
+				<!--FLEET ENTRY BODY-->
+				<div class="card-block bg-white">
+					<!--BODY-->
+					<form [formGroup]="fleetFormGroup">
+						<!--<form>-->
+						<fieldset class="form-group">
+							<div class="row">
+								<div class="col-xl-12 col-lg-12">
+									<div class="card card-block">
+										<div class="table-responsive" style="overflow-x: hidden">
+											<table class="table">
+												<thead class="thead-neutral">
+													<tr>
+														<th>
+															<div class="row">
+																<div class="col-sm-6" style="text-align: center" translate>{{'fleetEntry.powerUnit'}}</div>
+																<div class="col-sm-6" style="text-align: center" translate>{{'fleetEntry.unitNum'}}</div>
+															</div>
+														</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td>
+															<div formArrayName="vehicleInfos">
+																<div *ngFor="let vehicleInfo of fleetFormGroup.controls.vehicleInfos.controls; let i=index" class="panel panel-default">
+																	<div [formGroupName]="i">
+																		<div class="row">
+																			<div class="col-sm-6">
+																				<input class="form-control" formControlName="vehicleType" readonly style="text-align: center">
+																			</div>
+																			<div class="col-sm-6">
+																				<input class="form-control" type="number" formControlName="units" min=0 style="text-align: center">
+																			</div>
+																			<div class="col-sm-6">
+																				<input class="form-control" type="number" formControlName="factor" hidden>
+																			</div>
+																		</div>
+																	</div>
+																	<!-- Keep this tr to have proper alignment.-->
+																	<tr>
+																		<td></td>
+																	</tr>
+																</div>
+															</div>
+														</td>
+													</tr>
+													<tr>
+														<td>
+															<div class="row">
+																<div class="alert col-sm-12" [hidden]="hideFleetEntryErr" style="text-align: center">{{fleetUnitErrMsg}}</div>
+															</div>
+														</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+						</fieldset>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
