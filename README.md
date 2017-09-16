@@ -1,4 +1,4 @@
-Here is an old version of [QUEST](https://quest-88e85.firebaseapp.com/)
+Here is an old version of [QUEST](https://quest-88e85.firebaseapp.com/) (no login required)
 
 Here is a 2 minute [Video Demo](https://drive.google.com/file/d/0B-7I87krIcO0Q20zT1FTUW11R1U/view)
 
