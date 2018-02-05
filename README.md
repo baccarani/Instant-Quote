@@ -2,6 +2,8 @@ Here is an old version of [QUEST](https://quest-88e85.firebaseapp.com/) (no logi
 
 Here is a 2 minute [Video Demo](https://drive.google.com/file/d/0B-7I87krIcO0Q20zT1FTUW11R1U/view)
 
+Here is the [Live Version](https://drive.google.com/file/d/0B-7I87krIcO0Q20zT1FTUW11R1U/view) (login required)
+
 ## Login
 ![screencapture-ec2-54-175-126-35-compute-1-amazonaws-1505381378310](https://user-images.githubusercontent.com/29188001/30494209-ccf880da-9a79-11e7-9e50-5786cf20840e.png)
 ## Home
