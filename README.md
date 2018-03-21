@@ -1,6 +1,6 @@
 Here is a 2 minute [Video Demo](https://goo.gl/rQnPdx)
 
-Here is the [Live Version](https://cfins-iq.com/#/) (login required)
+Here is the [Live Version](https://cfins-iq.com/#/) 
 
 ## Login
 ![screencapture-ec2-54-175-126-35-compute-1-amazonaws-1505381378310](https://user-images.githubusercontent.com/29188001/30494209-ccf880da-9a79-11e7-9e50-5786cf20840e.png)
